@@ -1,0 +1,12 @@
+
+1.update_time是使用int，还是on update current_timestamp自动更新好？
+
+2.相关tag是标记在shop还是在goods合适？
+
+3.品牌应该是标记在goods维度还是shop维度？
+
+4.店铺可能需要支付认证费用，需要加shop_pay表；
+
+5.支持一个用户多店铺；
+
+6.运费模板设置：店铺维度统一设置还是商品维度每个设置？
