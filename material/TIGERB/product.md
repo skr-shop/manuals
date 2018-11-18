@@ -24,7 +24,7 @@ CREATE TABLE `product_category` (
     `name` varchar(255) unsigned NOT NULL DEFAULT '0' COMMENT '分类名称',
     `desc` varchar(255) unsigned NOT NULL DEFAULT '0' COMMENT '分类描述',
     `pic_url` varchar(255) unsigned NOT NULL DEFAULT '0' COMMENT '分类图片',
-    `path` varchar(255) unsigned NOT NULL DEFAULT '0' COMMENT '分类地址',
+    `path` varchar(255) unsigned NOT NULL DEFAULT '0' COMMENT '分类地址{pid}-{child_id}-...',
     `create_at` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
     `create_by` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '创建人staff_id',
     `update_at` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '更新时间',
@@ -46,7 +46,6 @@ CREATE TABLE `product_spu` (
     `main_url` text COMMENT '商品介绍主图 多个图片逗号分隔',
     `price` decimal(11,2) unsigned NOT NULL DEFAULT '0' COMMENT '售价',
     `market_price` decimal(11,2) unsigned NOT NULL DEFAULT '0' COMMENT '市场价',
-    `extends` text NOT NULL DEFAULT '0' COMMENT '扩展字段',
     `create_at` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
     `create_by` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '创建人staff_id',
     `update_at` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '更新时间',
@@ -65,7 +64,6 @@ CREATE TABLE `product_sku` (
     `main_url` text COMMENT '商品介绍主图 多个图片逗号分隔',
     `price` decimal(11,2) unsigned NOT NULL DEFAULT '0' COMMENT '售价',
     `market_price` decimal(11,2) unsigned NOT NULL DEFAULT '0' COMMENT '市场价',
-    `extends` text NOT NULL DEFAULT '0' COMMENT '扩展字段',
     `create_at` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
     `create_by` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '创建人staff_id',
     `update_at` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '更新时间',
@@ -122,6 +120,7 @@ CREATE TABLE `product_sku_stock` (
     `sku_id` int(11) unsigned NOT NULL DEFAULT '0' COMMENT 'sku id',
     `quantity` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '库存',
     `quantity_lock` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '锁定库存',
+    `quantity_over` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '超卖库存 0:严格不准超卖',
     `create_at` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
     `create_by` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '创建人staff_id',
     `update_at` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '更新时间',
@@ -130,4 +129,170 @@ CREATE TABLE `product_sku_stock` (
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='sku库存表';
 
+```
+
+```
+仓储 --(incre sku quantity)push/pull--> update `product_sku_stock` & incr redis
+
+回写脚本 ----> select `product_sku_stock`.`quantity`  & update
+```
+
+# API
+
+1. spu详情 GET {version}/product/spu/{spu_id}
+
+请求参数：
+
+字段|类型|是否必传|描述
+------------|------------|------------|------------
+spu_id|number|yes|spu ID
+
+响应内容：
+```json
+{
+    "code": "200",
+    "result": {
+        "brand_info": {
+            "id": "number, 品牌ID",
+            "name": "string, 品牌名称",
+            "desc": "string, 品牌描述",
+            "logo_url": "string, 品牌logo图片",
+        },
+        "category_info": {
+            "id": "number, 分类ID",
+            "name": "string, 品牌名称",
+            "desc": "string, 品牌描述",
+            "pic_url": "string, 分类图片",
+            "path": "string, 分类地址{pid}-{child_id}-...",
+        },
+        "spu_info": {
+            "id": "number, spu id",
+            "name": "string, spu名称",
+            "desc": "string, spu描述",
+            "unit": "string, spu单位",
+            "banner_url": [
+                "string, banner 图片url",
+                "string, banner 图片url",
+            ],
+            "main_url": [
+                "string, 商品介绍主图 图片url",
+                "string, 商品介绍主图 图片url",
+            ],
+            "price": "string, 售价",
+            "market_price": "string, 市场价",
+            "attrs": [
+                {
+                    "attr": {
+                        "id": "属性ID",
+                        "name": "string, 属性名称",
+                        "desc": "string, 属性描述",
+                        "values": [
+                            {
+                                "id": "属性值ID",
+                                "name": "string, 属性值",
+                                "desc": "string, 属性值描述",
+                            }
+                        ],
+                    }
+                }
+            ],
+            "skus": [
+                "number, sku id",
+                "number, sku id",
+            ],
+            "skus_map": {
+                "{attr_value_id}-{attr_value_id}-...": "number, sku id",
+                "{attr_value_id}-{attr_value_id}-...": "number, sku id",
+                "{attr_value_id}-{attr_value_id}-...": "number, sku id",
+                "{attr_value_id}-{attr_value_id}-...": "number, sku id",
+                "{attr_value_id}-{attr_value_id}-...": "number, sku id",
+                "{attr_value_id}-{attr_value_id}-...": "number, sku id",
+            }
+        }
+    }
+}
+```
+
+2. 获取spu下所有skus库存 GET {version}/stock/spu/{spu_id}
+
+请求参数：
+
+字段|类型|是否必传|描述
+------------|------------|------------|------------
+spu_id|number|yes|spu ID
+
+响应内容：
+```json
+{
+    "code": "200",
+    "result": {
+            "skus_stock": {
+                "int, sku id": {
+                    "quantity": "int, 剩余库存数量"
+                }
+            }
+        }
+    }
+}
+```
+
+3. sku详情 GET {version}/product/sku/{sku_id}
+
+请求参数：
+
+字段|类型|是否必传|描述
+------------|------------|------------|------------
+sku|number|yes|sku ID
+
+响应内容：
+```json
+{
+    "code": "200",
+    "result": {
+        "id": "number, sku id",
+        "name": "string, sku名称",
+        "desc": "string, sku描述",
+        "unit": "string, sku单位",
+        "banner_url": [
+            "string, banner 图片url",
+            "string, banner 图片url",
+        ],
+        "main_url": [
+            "string, 商品介绍主图 图片url",
+            "string, 商品介绍主图 图片url",
+        ],
+        "price": "string, 售价",
+        "market_price": "string, 市场价",
+    }
+}
+```
+
+4. spu列表 GET {version}/product/spu/list
+
+请求参数：
+
+字段|类型|是否必传|描述
+------------|------------|------------|------------
+
+响应内容：
+```json
+{
+    "code": "200",
+    "result": {
+        "list": [
+            {
+                "id": "number, spu id",
+                "name": "string, spu名称",
+                "desc": "string, spu描述",
+                "unit": "string, spu单位",
+                "banner_url": [
+                    "string, banner 图片url",
+                    "string, banner 图片url",
+                ],
+                "price": "string, 售价",
+                "market_price": "string, 市场价",
+            }
+        ]
+    }
+}
 ```
