@@ -2,6 +2,10 @@
 
 <p align="center">Do design No code | 只设计不码码</p>
 
+<p align="center">
+<a href="https://github.com/skr-shop/manuals/blob/master/LICENSE"><img src="https://img.shields.io/badge/license-LGPL--3.0-yellowgreen.svg" alt="Lisense"></a>
+</p>
+
 <p align="center"><a href="http://skrshop.tech/">skrshop.tech</a></p>
 
 

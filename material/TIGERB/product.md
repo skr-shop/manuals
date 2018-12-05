@@ -44,8 +44,10 @@ CREATE TABLE `product_spu` (
     `unit` varchar(255) unsigned NOT NULL DEFAULT '0' COMMENT 'spu单位',
     `banner_url` text COMMENT 'banner图片 多个图片逗号分隔',
     `main_url` text COMMENT '商品介绍主图 多个图片逗号分隔',
-    `price` decimal(11,2) unsigned NOT NULL DEFAULT '0' COMMENT '售价',
-    `market_price` decimal(11,2) unsigned NOT NULL DEFAULT '0' COMMENT '市场价',
+    `price_fee` int unsigned NOT NULL DEFAULT 0 COMMENT '售价，整数方式保存',
+    `price_scale` tinyint unsigned NOT NULL DEFAULT 0 COMMENT '售价，金额对应的小数位数',
+    `market_price_fee` int unsigned NOT NULL DEFAULT 0 COMMENT '市场价，整数方式保存',
+    `market_price_scale` tinyint unsigned NOT NULL DEFAULT 0 COMMENT '市场价，金额对应的小数位数',
     `create_at` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
     `create_by` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '创建人staff_id',
     `update_at` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '更新时间',
@@ -59,11 +61,13 @@ CREATE TABLE `product_spu` (
 CREATE TABLE `product_sku` (
     `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT 'sku id',
     `spu_id` int(11) unsigned NOT NULL DEFAULT '0' COMMENT 'spu id',
-    `attrs` text COMMENT '属性{attr_id}-{attr_value_id} 多个属性逗号分隔',
+    `attrs` text COMMENT '属性值{attr_value_id}-{attr_value_id} 多个属性值逗号分隔',
     `banner_url` text COMMENT 'banner图片 多个图片逗号分隔',
     `main_url` text COMMENT '商品介绍主图 多个图片逗号分隔',
-    `price` decimal(11,2) unsigned NOT NULL DEFAULT '0' COMMENT '售价',
-    `market_price` decimal(11,2) unsigned NOT NULL DEFAULT '0' COMMENT '市场价',
+    `price_fee` int unsigned NOT NULL DEFAULT 0 COMMENT '售价，整数方式保存',
+    `price_scale` tinyint unsigned NOT NULL DEFAULT 0 COMMENT '售价，金额对应的小数位数',
+    `market_price_fee` int unsigned NOT NULL DEFAULT 0 COMMENT '市场价，整数方式保存',
+    `market_price_scale` tinyint unsigned NOT NULL DEFAULT 0 COMMENT '市场价，金额对应的小数位数',
     `create_at` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
     `create_by` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '创建人staff_id',
     `update_at` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '更新时间',
@@ -100,6 +104,10 @@ CREATE TABLE `product_attr_value` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='属性值';
 
 -- 关联关系冗余表 product_spu_sku_attr_map
+-- 1. spu下 有哪些sku
+-- 2. spu下 有那些属性 
+-- 3. spu下 每个属性对应的属性值(一对多) 
+-- 4. spu下 每个属性值对应的sku(一对多)
 CREATE TABLE `product_spu_sku_attr_map` (
     `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT 'ID',
     `spu_id` int(11) unsigned NOT NULL DEFAULT '0' COMMENT 'spu id',
@@ -151,6 +159,7 @@ spu_id|number|yes|spu ID
 ```json
 {
     "code": "200",
+    "msg": "OK",
     "result": {
         "brand_info": {
             "id": "number, 品牌ID",
@@ -180,23 +189,28 @@ spu_id|number|yes|spu ID
             ],
             "price": "string, 售价",
             "market_price": "string, 市场价",
-            "attrs": [
-                {
-                    "attr": {
-                        "id": "属性ID",
-                        "name": "string, 属性名称",
-                        "desc": "string, 属性描述",
-                        "values": [
-                            {
-                                "id": "属性值ID",
-                                "name": "string, 属性值",
-                                "desc": "string, 属性值描述",
-                            }
-                        ],
-                    }
+            "attrs": [ // 有那些属性
+                { 
+                    "id": "属性ID",
+                    "name": "string, 属性名称",
+                    "desc": "string, 属性描述",
+                    "values": [ // 每个属性对应的属性值(一对多) 
+                        {
+                            "id": "属性值ID",
+                            "name": "string, 属性值",
+                            "desc": "string, 属性值描述",
+                            // 每个属性值对应的sku(一对多) 
+                            // 页面初始化时，按钮不可点击逻辑判断： 如果该属性值下所有sku没有库存，则该属性按钮不可点击
+                            // 选择属性值时，按钮不可点击逻辑判断：???
+                            "skus": [
+                                "number, sku id",
+                                "number, sku id",
+                            ],
+                        }
+                    ],
                 }
             ],
-            "skus": [
+            "skus": [ // 有哪些sku
                 "number, sku id",
                 "number, sku id",
             ],
@@ -225,6 +239,7 @@ spu_id|number|yes|spu ID
 ```json
 {
     "code": "200",
+    "msg": "OK",
     "result": {
             "skus_stock": {
                 "int, sku id": {
@@ -248,6 +263,7 @@ sku|number|yes|sku ID
 ```json
 {
     "code": "200",
+    "msg": "OK",
     "result": {
         "id": "number, sku id",
         "name": "string, sku名称",
@@ -278,6 +294,7 @@ sku|number|yes|sku ID
 ```json
 {
     "code": "200",
+    "msg": "OK",
     "result": {
         "list": [
             {
