@@ -863,7 +863,7 @@ sku表|product_sku
 销售属性值|product_attr_value
 sku库存表|product_sku_stock
 
-除了上面的表之外，我又加了另一张表 `关联关系冗余表 product_spu_sku_attr_map`，为什么呢？顾名思义，冗余用的，有了这张表，我们可以很高效的的到：
+除了上面的表之外，我又加了另一张表 `关联关系冗余表 product_spu_sku_attr_map`，为什么呢？顾名思义，冗余用的，有了这张表，我们可以很高效的得到：
 
 1. spu下 有哪些sku
 2. spu下 有那些销售属性
