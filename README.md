@@ -21,8 +21,7 @@
     + [商品系统(Temporal万物)](?id=商品系统)
 - [交易中心](?id=交易中心)
     + [常见第三方支付流程](?id=常见第三方支付流程)
-    + 支付系统
-    + 对账系统
+    + [支付系统设计](?id=支付系统设计)
 - [订单中心](?id=订单中心)
 - [仓储系统](?id=仓储系统)
     + 地址服务
@@ -1307,11 +1306,395 @@ sku|number|yes|sku ID
 
 ![pay-2](https://dayutalk.cn/img/pay-2.png)
 
-## 支付系统
-即将上线
+## 支付系统设计
+现在的互联网业务，都少不了支付这个环节。那么如何去设计一个通用的库，满足各个支付渠道以及自己的业务？希望本文能够给你带来收获！
 
-## 对账系统
-耐心等待...
+在开始正文之前，先说明下，本文中提及的所有设计都是将支付当作一个独立的服务来进行的。希望再次之前大家对单体应用、服务等概念有所理解，为了行文清晰，我也会对这部分进行说明。
+
+# 从模块到服务
+
+我记得最开始工作的时候，所有的功能：加购物车/下单/支付 等逻辑都是放在一个项目里。如果一个新的项目需要某个功能，就把这个部分的功能包拷贝到新的项目。数据库也原封不动的拷贝过来，稍微根据需求改改。
+
+这就是所谓的 **单体应用** 时代，随着公司产品线开始多元，每条产品线都需要用到支付服务。如果支付模块调整了代码，那么就会处处改动、处处测试。另一方面公司的交易数据割裂在不同的系统中，无法有效汇总统一分析、管理。
+
+这时就到了系统演进的时候，我们把每个产品线的支付模块抽离成统一的服务。对自己公司内部提供统一的API使用，可以对这些API进一步包装成对应的SDK，供内部业务线快速使用。这里服务使用HTTP或者是RPC协议都可以根据公司实际情况决定。不过如果考虑到未来给第三方使用，建议使用HTTP协议，
+
+经过改进后，系统结构变化如下图：
+
+![image-20190309104541749](/Users/helei/code/helei.blog/source/img/image-20190309104541749.png)
+
+总结下，将支付单独抽离成服务后，带来好处如下：
+
+1. 避免重复开发，数据隔离的现象出现；
+2. 支付系统周边功能演进更容易，也会更晚上。如：对账系统、实时交易数据展示；
+3. 随时可对外开发，对外输出Paas能力，成为有收入的项目；
+4. 专门的团队进行维护，系统更有机会演进成顶级系统。
+
+# 系统能力
+
+如果我们接手了该项目，需要为公司从零搭建这样的支付系统。我们该从哪些方面入手？这样的系统到底需要具备什么样的能力呢？
+
+首先支付系统我们可以理解成是一个适配器。他需要把很多第三方的接口进行统一的整合封装后，对内部提供统一的接口，减少内部接入的成本。做为一个最基本的支付系统。需要对内提供如下接口出来：
+
+1. 发起支付，我们取名：`/gopay`
+2. 发起退款，我们取名：`/refund`
+3. 接口异步通知，我们取名：`/notify/支付渠道/商户交易号`
+4. 接口同步通知，我们取名：`/return/支付渠道/商户交易号`
+5. 交易查询，我们取名：`/query/trade`
+6. 退款查询，我们取名：`/query/refund`
+7. 账单获取，我们取名：`/query/bill`
+8. 结算明细，我们取名：`/query/settle`
+
+一个基础的支付系统，上面8个接口是肯定需要提供的（这里忽略调一些转账、绑卡等接口）。现在我们来基于这些接口看看都有哪些系统会用到。
+
+![image-20190309111001880](/Users/helei/code/helei.blog/source/img/image-20190309111001880.png)
+
+下面按照系统维度，介绍下这些接口如何使用，以及内部的一些逻辑。
+
+## 应用系统
+
+一般支付网关会提供两种方式让应用系统接入：
+
+1. 网关模式，也就是应用系统自己需要开发一个收银台；（适合提供给第三方）
+2. 收银台模式，应用系统直接打开支付网关的统一收银台。（内部业务）
+
+下面为了讲清楚设计思路，我们按照 **网关模式** 进行讲解。
+
+对于应用系统它需要能够请求支付，也就是调用 `gopay` 接口。这个接口会处理商户的数据，完成后会调用第三方网关接口，并将返回结果统一处理后返回给应用方。
+
+这里需要注意，第三方针对支付接口根据我的经验大致有以下情况：
+
+1. 支付时，不需要调用第三方，按照规则生成数据即可；
+2. 支付时，需要调用第三方多个接口完成逻辑（这可能比较慢，大型活动时需要考虑限流/降配）；
+3. 返回的数据是一个url，可直接跳转到第三方完成支付（wap/pc站）；
+4. 返回的数据是xml/json结构，需要拼装或作为参数传给她的sdk（app）。
+
+这里由于第三方返回结构的不统一，我们需要统一处理成统一格式，返回给商户端。我推荐使用json格式。
+
+```json
+{
+    "errno":0,
+    "msg":"ok",
+    "data":{
+
+    }
+}
+```
+
+我们把所有的变化封装在 **data** 结构中。举个例子，如果返回的一个url。只需要应用程序发起 **GET** 请求。我们可以这样返回：
+
+```json
+{
+    "errno":0,
+    "msg":"ok",
+    "data":{
+        "url":"xxxxx",
+        "method":"GET"
+    }
+}
+```
+
+如果是返回的结构，需要应用程序直接发起 **POST** 请求。我们可以这样返回：
+
+```json
+{
+    "errno":1,
+    "msg":"ok",
+    "data":{
+        "from":"<form action="xxx" method="POST">xxxxx</form>",
+        "method":"POST"
+    }
+}
+```
+
+这里的 **form** 字段，生成了一个form表单，应用程序拿到后可直接显示然后自动提交。当然封装成 from表单这一步也可以放在商户端进行。
+
+上面的数据格式仅仅是一个参考。大家可根据自己的需求进行调整。
+
+一般应用系统出了会调用发起支付的接口外，可能还需要调用 支付结果查询接口。当然大多数情况下不需要调用，应用系统对交易的状态只应该依赖自己的系统状态。
+
+##对账系统
+
+对于对账，一般分为两个类型：**交易对账** 与 **结算对账**
+
+### 交易对账
+
+交易对账的核心点是：**检查每一笔交易是否正确**。它主要目的是看我们系统中的每一笔交易与第三方的每一笔交易是否一致。
+
+这个检查逻辑很简单，对两份账单数据进行比较。它主要是使用 `/query/bill` 接口，拿到在第三方那边完成的交易数据。然后跟我方的交易成功数据进行比较。检查是否存在误差。
+
+这个逻辑非常简单，但是有几点需要大家注意：
+
+1. 我方的数据需要正常支付数据+重复支付数据的总和；
+2. 对账检查不成功主要包括：**金额不对**、**第三方没有找到对应的交易数据**、**我方不存在对应的交易数据**。
+
+针对这些情况都需要有对应的处理手段进行处理。在我的经验中上面的情况都有过遇到。
+
+**金额不对**：主要是由于第三方的问题，可能是系统升级故障、可能是账单接口金额错误；
+
+**第三方无交易数据：** 可能是拉去的账单时间维度问题（比如存在时差），这种时区问题需要自己跟第三方确认找到对应的时间差。也可能是被攻击，有人冒充第三方异步通知（说明系统校验机制又问题或者密钥泄漏了）。
+
+**自己系统无交易数据：** 这种原因可能是第三方通知未发出或者未正确处理导致的。
+
+上面这些问题的处理绝大部份都可以依赖 `query/trade`  `query/refund` 来完成自动化处理。
+
+### 结算对账
+
+那么有了上面的 **交易对账** 为什么还需要 **结算对账** 呢？这个系统又是干嘛的？先来看下结算的含义。
+
+> 结算，就是第三方网关在固定时间点，将T+1或其它约定时间的金额，汇款到公司账号。
+
+下面我们假设结算周期是： **T+1**。结算对账主要使用到的接口是 `/query/settle`，这个接口获取的主要内容是：每一笔结算的款项都是由哪些笔交易组成。以及本次结算扣除多少手续费用。
+
+它的逻辑其实也很简单。我们先从自己的系统按照 **T+1** 的结算周期，计算出对方应该汇款给我们多少金额。然后与刚刚接口获取到的数据金额比较：
+
+> 银行收款金额 + 手续费 = 我方系统计算的金额
+
+这一步检查通过后，说明金额没有问题。接下来需要检查本次结算下的每一笔订单是否一致。
+
+结算系统是 **强依赖** 对账系统的。如果对账发现异常，那么结算金额肯定会出现异常。另外结算需要注意的一些问题是：
+
+- 银行可能会自行退款给用户，因为用户可直接向自己发卡行申请退款；
+- 结算也存在时区差问题；
+- 结算接口中的明细交易状态与我方并不完全一致。比如：银行结算时发现某笔退款完成，但我方系统在进行比较时按照未退款完成的逻辑在处理。
+
+针对上面的问题，大家根据自己的业务需求需要做一些方案来进行自动化处理。
+
+##财务系统
+
+财务系统有很多内部业务，我这里只有与支付系统相关的。（当然上面的对账系统也可以算是财务范畴）。
+
+财务系统与支付主要的一个关系点在于校验交易、以及退款。这里校验交易可以使用 `query/trade`  `query/refund`这两个接口来完成。这个逻辑过程就不需要说了。下重点说下退款。
+
+我看到很多的系统退款是直接放在了应用里边，用户申请退款直接就调用退款接口进行退款。这样的风险非常高。支付系统的关于资金流向的接口一定要慎重，不能过多的直接暴露给外部，带来风险。
+
+退款的功能应该是放到财务系统来做。这样可以走内部的审批流程（是否需要根据业务来），并且在财务系统中可以进行更多检查来觉得是否立即进行退款，或者进入等待、拒绝等流程。
+
+## 第三方网关
+
+针对第三方主要使用到的其实就是异步通知与同步通知两个接口。这一部分的逻辑其实非常简单。就是根据第三方的通知完成交易状态的变更。以及通知到自己对应的应用系统。
+
+这部分比较复杂的是，第三方的通知数据结构不统一、通知的类型不统一。比如：有的退款是同步返回结果、有的是异步返回结果。这里如何设计会在后面的 **系统设计** 中给出答案。
+
+# 数据库设计
+
+数据的设计是按照：交易、退款、日志 来设计的。对于上面说到的对账等功能并没有。这部分不难大家可以自行设计，按照上面讲到的思路。主要的表介绍如下：
+
+- `pay_transaction` 记录所有的交易数据。
+- `pay_transaction_extension` 记录每次向第三方发起交易时，生成的交易号
+- `pay_log_data` 所有的日志数据，如：支付请求、退款请求、异步通知等
+- `pay_repeat_transaction` 重复支付的数据
+- `pay_notify_app_log` 通知应用程序的日志
+- `pay_refund` 记录所有的退款数据
+
+表结构如下：
+```sql
+-- -----------------------------------------------------
+-- Table 创建支付流水表
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `pay_transaction` (
+  `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `app_id` VARCHAR(32) NOT NULL COMMENT '应用id',
+  `pay_method_id` INT UNSIGNED NOT NULL DEFAULT 0 COMMENT '支付方式id，可以用来识别支付，如：支付宝、微信、Paypal等',
+  `app_order_id` VARCHAR(64) NOT NULL COMMENT '应用方订单号',
+  `transaction_id` VARCHAR(64) NOT NULL COMMENT '本次交易唯一id，整个支付系统唯一，生成他的原因主要是 order_id对于其它应用来说可能重复',
+  `total_fee` INT UNSIGNED NOT NULL DEFAULT 0 COMMENT '支付金额，整数方式保存',
+  `scale` TINYINT UNSIGNED NOT NULL DEFAULT 0 COMMENT '金额对应的小数位数',
+  `currency_code` CHAR(3) NOT NULL DEFAULT 'CNY' COMMENT '交易的币种',
+  `pay_channel` VARCHAR(64) NOT NULL COMMENT '选择的支付渠道，比如：支付宝中的花呗、信用卡等',
+  `expire_time` INT UNSIGNED NOT NULL DEFAULT 0 COMMENT '订单过期时间',
+  `return_url` VARCHAR(255) NOT NULL COMMENT '支付后跳转url',
+  `notify_url` VARCHAR(255) NOT NULL COMMENT '支付后，异步通知url',
+  `email` VARCHAR(64) NOT NULL COMMENT '用户的邮箱',
+  `sing_type` VARCHAR(10) NOT NULL DEFAULT 'RSA' COMMENT '采用的签方式：MD5 RSA RSA2 HASH-MAC等',
+  `intput_charset` CHAR(5) NOT NULL DEFAULT 'UTF-8' COMMENT '字符集编码方式',
+  `payment_time` INT UNSIGNED NOT NULL DEFAULT 0 COMMENT '第三方支付成功的时间',
+  `notify_time` INT UNSIGNED NOT NULL DEFAULT 0 COMMENT '收到异步通知的时间',
+  `finish_time` INT UNSIGNED NOT NULL DEFAULT 0 COMMENT '通知上游系统的时间',
+  `trade_no` VARCHAR(64) NOT NULL COMMENT '第三方的流水号',
+  `transaction_code` VARCHAR(64) NOT NULL COMMENT '真实给第三方的交易code，异步通知的时候更新',
+  `order_status` TINYINT NOT NULL DEFAULT 0 COMMENT '0:等待支付，1:待付款完成， 2:完成支付，3:该笔交易已关闭，-1:支付失败',
+  `create_at` INT UNSIGNED NOT NULL DEFAULT 0 COMMENT '创建时间',
+  `update_at` INT UNSIGNED NOT NULL DEFAULT 0 COMMENT '更新时间',
+  `create_ip` INT UNSIGNED NOT NULL DEFAULT 0 COMMENT '创建的ip，这可能是自己服务的ip',
+  `update_ip` INT UNSIGNED NOT NULL DEFAULT 0 COMMENT '更新的ip',
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `uniq_tradid` (`transaction_id`),
+  INDEX `idx_trade_no` (`trade_no`),
+  INDEX `idx_ctime` (`create_at`)),
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COMMENT = '发起支付的数据';
+
+-- -----------------------------------------------------
+-- Table 交易扩展表
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `pay_transaction_extension` (
+  `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `transaction_id` VARCHAR(64) NOT NULL COMMENT '系统唯一交易id',
+  `pay_method_id` INT UNSIGNED NOT NULL DEFAULT 0,
+  `transaction_code` VARCHAR(64) NOT NULL COMMENT '生成传输给第三方的订单号',
+  `call_num` TINYINT UNSIGNED NOT NULL DEFAULT 0 COMMENT '发起调用的次数',
+  `extension_data` TEXT NOT NULL COMMENT '扩展内容，需要保存：transaction_code 与 trade no 的映射关系，异步通知的时候填充',
+  `create_at` INT UNSIGNED NOT NULL DEFAULT 0 COMMENT '创建时间',
+  `create_ip` INT UNSIGNED NOT NULL COMMENT '创建ip',
+  PRIMARY KEY (`id`),
+  INDEX `idx_trads` (`transaction_id`, `pay_status`),
+  UNIQUE INDEX `uniq_code` (`transaction_code`)),
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COMMENT = '交易扩展表';
+
+-- -----------------------------------------------------
+-- Table 交易系统全部日志
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `pay_log_data` (
+  `id` BIGINT UNSIGNED NOT NULL,
+  `app_id` VARCHAR(32) NOT NULL COMMENT '应用id',
+  `app_order_id` VARCHAR(64) NOT NULL COMMENT '应用方订单号',
+  `transaction_id` VARCHAR(64) NOT NULL COMMENT '本次交易唯一id，整个支付系统唯一，生成他的原因主要是 order_id对于其它应用来说可能重复',
+  `request_header` TEXT NOT NULL COMMENT '请求的header 头',
+  `request_params` TEXT NOT NULL COMMENT '支付的请求参数',
+  `log_type` VARCHAR(10) NOT NULL COMMENT '日志类型，payment:支付; refund:退款; notify:异步通知; return:同步通知; query:查询',
+  `create_at` INT UNSIGNED NOT NULL DEFAULT 0 COMMENT '创建时间',
+  `create_ip` INT UNSIGNED NOT NULL DEFAULT 0 COMMENT '创建ip',
+  PRIMARY KEY (`id`),
+  INDEX `idx_tradt` (`transaction_id`, `log_type`)),
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COMMENT = '交易日志表';
+
+
+-- -----------------------------------------------------
+-- Table 重复支付的交易
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `pay_repeat_transaction` (
+  `id` BIGINT UNSIGNED NOT NULL,
+  `app_id` VARCHAR(32) NOT NULL COMMENT '应用的id',
+  `transaction_id` VARCHAR(64) NOT NULL COMMENT '系统唯一识别交易号',
+  `transaction_code` VARCHAR(64) NOT NULL COMMENT '支付成功时，该笔交易的 code',
+  `trade_no` VARCHAR(64) NOT NULL COMMENT '第三方对应的交易号',
+  `pay_method_id` INT UNSIGNED NOT NULL DEFAULT 0 COMMENT '支付方式',
+  `total_fee` INT UNSIGNED NOT NULL DEFAULT 0 COMMENT '交易金额',
+  `scale` TINYINT UNSIGNED NOT NULL DEFAULT 0 COMMENT '小数位数',
+  `currency_code` CHAR(3) NOT NULL DEFAULT 'CNY' COMMENT '支付选择的币种，CNY、HKD、USD等',
+  `payment_time` INT NOT NULL COMMENT '第三方交易时间',
+  `repeat_type` TINYINT UNSIGNED NOT NULL DEFAULT 1 COMMENT '重复类型：1同渠道支付、2不同渠道支付',
+  `repeat_status` TINYINT UNSIGNED DEFAULT 0 COMMENT '处理状态,0:未处理；1:已处理',
+  `create_at` INT UNSIGNED NOT NULL DEFAULT 0 COMMENT '创建时间',
+  `update_at` INT UNSIGNED NOT NULL COMMENT '更新时间',
+  PRIMARY KEY (`id`),
+  INDEX `idx_trad` ( `transaction_id`),
+  INDEX `idx_method` (`pay_method_id`),
+  INDEX `idx_time` (`create_at`)),
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COMMENT = '记录重复支付';
+
+
+-- -----------------------------------------------------
+-- Table 通知上游应用日志
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `pay_notify_app_log` (
+  `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `app_id` VARCHAR(32) NOT NULL COMMENT '应用id',
+  `pay_method_id` INT UNSIGNED NOT NULL DEFAULT 0 COMMENT '支付方式',
+  `transaction_id` VARCHAR(64) NOT NULL COMMENT '交易号',
+  `transaction_code` VARCHAR(64) NOT NULL COMMENT '支付成功时，该笔交易的 code',
+  `sign_type` VARCHAR(10) NOT NULL DEFAULT 'RSA' COMMENT '采用的签名方式：MD5 RSA RSA2 HASH-MAC等',
+  `input_charset` CHAR(5) NOT NULL DEFAULT 'UTF-8',
+  `total_fee` INT UNSIGNED NOT NULL DEFAULT 0 COMMENT '涉及的金额，无小数',
+  `scale` TINYINT UNSIGNED NOT NULL DEFAULT 0 COMMENT '小数位数',
+  `pay_channel` VARCHAR(64) NOT NULL COMMENT '支付渠道',
+  `trade_no` VARCHAR(64) NOT NULL COMMENT '第三方交易号',
+  `payment_time` INT UNSIGNED NOT NULL DEFAULT 0 COMMENT '支付时间',
+  `notify_type` VARCHAR(10) NOT NULL DEFAULT 'paid' COMMENT '通知类型，paid/refund/canceled',
+  `notify_status` VARCHAR(7) NOT NULL DEFAULT 'INIT' COMMENT '通知支付调用方结果；INIT:初始化，PENDING: 进行中；  SUCCESS：成功；  FAILED：失败',
+  `create_at` INT UNSIGNED NOT NULL DEFAULT 0,
+  `update_at` INT UNSIGNED NOT NULL DEFAULT 0,
+  PRIMARY KEY (`id`),
+  INDEX `idx_trad` (`transaction_id`),
+  INDEX `idx_app` (`app_id`, `notify_status`)
+  INDEX `idx_time` (`create_at`)),
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COMMENT = '支付调用方记录';
+
+
+-- -----------------------------------------------------
+-- Table 退款
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `pay_refund` (
+  `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `app_id` VARCHAR(64) NOT NULL COMMENT '应用id',
+  `app_refund_no` VARCHAR(64) NOT NULL COMMENT '上游的退款id',
+  `transaction_id` VARCHAR(64) NOT NULL COMMENT '交易号',
+  `trade_no` VARCHAR(64) NOT NULL COMMENT '第三方交易号',
+  `refund_no` VARCHAR(64) NOT NULL COMMENT '支付平台生成的唯一退款单号',
+  `pay_method_id` INT UNSIGNED NOT NULL DEFAULT 0 COMMENT '支付方式',
+  `pay_channel` VARCHAR(64) NOT NULL COMMENT '选择的支付渠道，比如：支付宝中的花呗、信用卡等',
+  `refund_fee` INT UNSIGNED NOT NULL DEFAULT 0 COMMENT '退款金额',
+  `scale` TINYINT UNSIGNED NOT NULL DEFAULT 0 COMMENT '小数位数',
+  `refund_reason` VARCHAR(128) NOT NULL COMMENT '退款理由',
+  `currency_code` CHAR(3) NOT NULL DEFAULT 'CNY' COMMENT '币种，CNY  USD HKD',
+  `refund_type` TINYINT UNSIGNED NOT NULL DEFAULT 0 COMMENT '退款类型；0:业务退款; 1:重复退款',
+  `refund_method` TINYINT UNSIGNED NOT NULL DEFAULT 1 COMMENT '退款方式：1自动原路返回; 2人工打款',
+  `refund_status` TINYINT UNSIGNED NOT NULL DEFAULT 0 COMMENT '0未退款; 1退款处理中; 2退款成功; 3退款不成功',
+  `create_at` INT UNSIGNED NOT NULL DEFAULT 0 COMMENT '创建时间',
+  `update_at` INT UNSIGNED NOT NULL DEFAULT 0 COMMENT '更新时间',
+  `create_ip` INT UNSIGNED NOT NULL DEFAULT 0 COMMENT '请求源ip',
+  `update_ip` INT UNSIGNED NOT NULL DEFAULT 0 COMMENT '请求源ip',
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `uniq_refno` (`refund_no`),
+  INDEX `idx_trad` (`transaction_id`),
+  INDEX `idx_status` (`refund_status`),
+  INDEX `idx_ctime` (`create_at`)),
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COMMENT = '退款记录';
+```
+
+表的使用逻辑进行下方简单描述：
+
+**支付**，首先需要记录请求日志到 `pay_log_data`中，然后生成交易数据记录到 `pay_transaction`与`pay_transaction_extension` 中。
+
+**收到通知**，记录数据到 `pay_log_data` 中，然后根据时支付的通知还是退款的通知，更新 `pay_transaction` 与 `pay_refund` 的状态。如果是重复支付需要记录数据到 `pay_repeat_transaction` 中。并且将需要通知应用的数据记录到 `pay_notify_app_log`，这张表相当于一个消息表，会有消费者会去消费其中的内容。
+
+**退款** 记录日志日志到 `pay_log_data` 中，然后记录数据到退款表中 `pay_refund`。
+
+> 这些表能够满足最基本的需求，其它内容可根据自己的需求进行扩张，比如：支持用户卡列表、退款走银行卡等。
+
+# 系统设计
+
+这部分主要说下系统该如何搭建，以及代码组织方式的建议。
+
+## 系统架构
+
+由于支付系统的安全性非常高，因此不建议将对应的入口直接暴露给用户可见。应该是在自己的应用系统中调用支付系统的接口来完成业务。另外系统对数据要求是：强一致性的。因此也没有缓存介入（当如缓存可以用来做报警，这不在本位范畴）。
+
+![image-20190309135800643](/Users/helei/code/helei.blog/source/img/image-20190309135800643.png)
+
+具体的实现，系统会使用两个域名，一个为内部使用，只有指定来源的ip能够访问固定功能（访问除通知外的其它功能）。另一个域名只能访问 `notify` `return` 两个路由。通过这种方式可以保证系统的安全。
+
+在数据库的使用上无论什么请求直接走 **Master** 库。这样保证数据的强一致。当然从库也是需要的。比如：账单、对账相关逻辑我们可以利用从库完成。
+
+## 代码设计
+
+不管想做什么最终都要用代码来实现。我们都知道需要可维护、可扩展的代码。那么具体到支付系统你会怎么做呢？我已支付为例说下我的代码结构设计思路。仅供参考。比如我要介入：微信、支付宝、招行 三家支付。我的代码结构图如下：
+
+![image-20190309142925499](/Users/helei/code/helei.blog/source/img/image-20190309142925499.png)
+
+用文字简单介绍下。我会将每一个第三方封装成： `XXXGateway` 类，内部是单纯的封装第三方接口，不管对方是 HTTP 请求还是 SOAP 请求，都在内部进行统一处理。
+
+另外有一层`XXXProxy` 来封装这些第三方提供的能力。这一层主要干两件事情：对传过来请求支付的数据进行个性化处理。对返回的结构进行统一处理返回上层统一的结构。当然根据特殊情况这里可以进行一切业务处理；
+
+通过上面的操作变化已经基本上被完全封装了。如果新增一个支付渠道。只需要增加：`XXXGateway ` 与 `XXXProxy`。
+
+那么 `Context` 与 `Server` 有什么用呢？`Server` 内部封装了所有的业务逻辑，它提供接口给 action 或者其它 server 进行调用。而 `Context` 这一层存在的价值是处理 `Proxy` 层返回的错误。以及在这里进行报警相关的处理。
+
+上面的结构只是我的一个实践，欢迎大家讨论。
+
+本文描述的系统只是满足了最基本的支付需求。缺少相关的监控、报警。如果你按照上文设计自己的系统，风险自担与我无关。
 
 # 订单中心
 
