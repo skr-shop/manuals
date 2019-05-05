@@ -58,6 +58,7 @@ AStraw|研究生创业者, 现于小米科技海外商城组从事商城后端�
 lwhcv|曾就职于百度/融360, 现于小米科技海外商城组从事商城后端研发工作|--------
 TIGERB|PHP框架[EasyPHP](http://easy-php.tigerb.cn/#/)作者，拥有A/B/C轮电商创业公司工作经验，现于小米科技海外商城组从事商城后端研发工作| [TIGERB的技术博客](http://tigerb.cn)
 Veaer|宇宙无敌风火轮全栈工程师 现于小米科技海外商城组从事商城后端研发工作| [Veaer](https://github.com/Veaer)
+Faaaar|啥都不会, 凑热闹的菜逼|[Faaaar](https://faaaar.github.io)
 
 # 技术栈选型
 
