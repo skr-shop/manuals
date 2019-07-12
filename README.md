@@ -3,7 +3,9 @@
 <p align="center">Do design No code | 只设计不码码</p>
 
 <p align="center">
-<a href="https://github.com/skr-shop/manuals/blob/master/LICENSE"><img src="https://img.shields.io/badge/license-cc--by--4.0-red.svg" alt="Lisense"></a>
+    <a href="https://github.com/skr-shop/manuals/blob/master/LICENSE"><img src="https://img.shields.io/badge/license-cc--by--4.0-red.svg" alt="Lisense"></a>
+    <iframe src="https://ghbtns.com/github-btn.html?user=skr-shop&repo=manuals&type=star&count=true" frameborder="0" scrolling="0" width="110px" height="20px"></iframe>
+    <iframe src="https://ghbtns.com/github-btn.html?user=skr-shop&repo=manuals&type=fork&count=true" frameborder="0" scrolling="0" width="110px" height="20px"></iframe>
 </p>
 
 <p align="center"><a href="http://skrshop.tech/">skrshop.tech</a></p>
