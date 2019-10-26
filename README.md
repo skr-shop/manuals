@@ -315,7 +315,7 @@ CREATE TABLE `auth_ms` (
     `update_by` int(11) NOT NULL DEFAULT '0' COMMENT '修改人staff_id',
     `status` tinyint(1) NOT NULL DEFAULT '0' COMMENT '状态 1:enable, 0:disable, -1:deleted',
     PRIMARY KEY (`id`),
-    KEY `idx_domain` (`domain`)
+    KEY `idx_domain` (`ms_domain`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='系统map(登记目前存在的后台系统信息)';
 
 -- 权限管理: 系统menu
