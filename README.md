@@ -315,7 +315,7 @@ CREATE TABLE `auth_ms` (
     `update_by` int(11) NOT NULL DEFAULT '0' COMMENT '修改人staff_id',
     `status` tinyint(1) NOT NULL DEFAULT '0' COMMENT '状态 1:enable, 0:disable, -1:deleted',
     PRIMARY KEY (`id`),
-    KEY `idx_domain` (`domain`)
+    KEY `idx_domain` (`ms_domain`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='系统map(登记目前存在的后台系统信息)';
 
 -- 权限管理: 系统menu
@@ -1691,7 +1691,7 @@ COMMENT = '退款记录';
 
 #### 系统架构
 
-由于支付系统的安全性非常高，因此不建议将对应的入口直接暴露给用户可见。应该是在自己的应用系统中调用支付系统的接口来完成业务。另外系统对数据要求是：强一致性的。因此也没有缓存介入（当如缓存可以用来做报警，这不在本位范畴）。
+由于支付系统的安全性非常高，因此不建议将对应的入口直接暴露给用户可见。应该是在自己的应用系统中调用支付系统的接口来完成业务。另外系统对数据要求是：强一致性的。因此也没有缓存介入（当如缓存可以用来做报警，这不在本文范畴）。
 
 ![image-20190309135800643](https://dayutalk.cn/img/image-20190309135800643.png)
 
