@@ -8,15 +8,18 @@
 
 <p align="center"><a href="http://skrshop.tech/">skrshop.tech</a></p>
 
-<p align="center">
-           <img width="30%" src="http://cdn.tigerb.cn/wechat-blog-qrcode.jpg?imageMogr2/thumbnail/260x260!/format/webp/blur/1x0/quality/90|imageslim">
-           <img width="30%" src="https://mmbiz.qpic.cn/mmbiz_jpg/zm9WZ2XoW59T36fKnWNMwUib1IKUibVAtBGiaicJ2f3aKuAXU52cA4wsgYoEGkKSgMbm0qzgevQMsA9l1xJPYHf0NA/640">
-<p>
-
-
 # 版权申明
 - 未经版权所有者明确授权，禁止发行本手册及其被实质上修改的版本。 
 - 未经版权所有者事先授权，禁止将此作品及其衍生作品以标准（纸质）书籍形式发行。  
+
+<p align="center">
+           <img width="30%" src="http://cdn.tigerb.cn/wechat-blog-qrcode.jpg?imageMogr2/thumbnail/260x260!/format/webp/blur/1x0/quality/90|imageslim">
+           <img width="30%" src="https://dayutalk.cn/img/mp-qrcode.jpg">
+<p>
+
+## Stargazers over time
+
+[![Stargazers over time](https://starchart.cc/skr-shop/manuals.svg)](https://starchart.cc/skr-shop/manuals)
 
 # 目录
 
