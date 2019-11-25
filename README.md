@@ -14,7 +14,7 @@
 
 <p align="center">
     <img style="vertical-align:middle" width="30%" src="http://cdn.tigerb.cn/wechat-blog-qrcode.jpg?imageMogr2/thumbnail/260x260!/format/webp/blur/1x0/quality/90|imageslim">
-    <img style="vertical-align:middle" width="30%" src="https://mmbiz.qpic.cn/mmbiz_jpg/zm9WZ2XoW58eUJSu7oOriaP2JSDt0QPR6HiaMgkKcYaqSfUibibiaPwf59ia1TtwxRttMOAbdt34seOLQWILZCPibx8WQ/0?wx_fmt=jpeg">
+    <img style="vertical-align:middle" width="30%" src="https://dayutalk.cn/img/pub-qr.jpeg?v=123">
            <i style="display:inline-block; height:100%; vertical-align:middle; width:0;"></i>
 <p>
 
