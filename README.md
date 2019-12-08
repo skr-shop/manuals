@@ -14,7 +14,7 @@
 
 <p align="center">
     <img style="vertical-align:middle" width="30%" src="http://cdn.tigerb.cn/wechat-blog-qrcode.jpg?imageMogr2/thumbnail/260x260!/format/webp/blur/1x0/quality/90|imageslim">
-    <img style="vertical-align:middle" width="30%" src="https://dayutalk.cn/img/pub-qr.jpeg?v=123">
+    <img style="vertical-align:middle" width="30%" src="https://dayutalk.cn/img/pub-qr.jpeg">
            <i style="display:inline-block; height:100%; vertical-align:middle; width:0;"></i>
 <p>
 
