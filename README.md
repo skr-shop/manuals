@@ -17,8 +17,8 @@
 - 未经版权所有者事先授权，禁止将此作品及其衍生作品以标准（纸质）书籍形式发行。  
 
 <p align="center">
-    <img style="vertical-align:middle" width="30%" src="http://cdn.tigerb.cn/wechat-blog-qrcode.jpg?imageMogr2/thumbnail/260x260!/format/webp/blur/1x0/quality/90|imageslim">
-    <img style="vertical-align:middle" width="30%" src="https://dayutalk.cn/img/pub-qr.jpeg">
+    <img style="vertical-align:middle" width="23%" src="http://cdn.tigerb.cn/wechat-blog-qrcode.jpg?imageMogr2/thumbnail/260x260!/format/webp/blur/1x0/quality/90|imageslim">
+    <img style="vertical-align:middle" width="50%" src="https://dayutalk.cn/img/pub-qr.jpeg">
            <i style="display:inline-block; height:100%; vertical-align:middle; width:0;"></i>
 <p>
 
