@@ -3,7 +3,7 @@
 <p align="center">Do design No code | 只设计不码码</p>
 
 <p align="center">
-    <img style="vertical-align:middle" width="30%" src="http://cdn.tigerb.cn/20191222164829.jpg?imageMogr2/thumbnail/1280x720!/format/webp/blur/1x0/quality/90|imageslim">
+    <img style="vertical-align:middle" width="60%" src="http://cdn.tigerb.cn/20191222164829.jpg?imageMogr2/thumbnail/1280x720!/format/webp/blur/1x0/quality/90|imageslim">
 <p>
 
 <p align="center">
