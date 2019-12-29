@@ -20,7 +20,7 @@
 
 如果前面的人手气不好，那么后面的余额越多，红包额度也就越多，因此实际概率一样的。
 
-> `Demo` 实战
+> `Demo`
 ```go
 package main
 
@@ -48,6 +48,9 @@ func main() {
 	fmt.Println(res)
 }
 
+// CalculateEnvelop 计算随机红包序列
+// count - 红包数量
+// amount - 总金额(单位：分)
 func CalculateEnvelop(count, amount int64) int64 {
 	if count == 1 {
 		return amount
