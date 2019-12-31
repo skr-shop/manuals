@@ -2,7 +2,7 @@
 
 ## 前言
 
-上篇文章[Skr-Shop通用抽奖工具之需求分析](http://tigerb.cn/2019/12/23/skr-lottery/)我们已经结合常见的一些抽奖场景，分析得到了一个符合这些抽奖场景的通用抽奖工具的五要素，如下：
+上篇文章[《SkrShop通用抽奖工具之需求分析》](http://tigerb.cn/2019/12/23/skr-lottery/)我们已经通过一些常见的抽奖场景，得到了符合这些抽奖场景的抽奖工具五要素：
 
 抽奖五要素|要素名称
 ------|------
@@ -20,7 +20,7 @@
 4. 奖品中奖概率配置
 5. 奖品投奖配置
 
-> 上篇文章回顾 [Skr-Shop通用抽奖工具之需求分析](http://tigerb.cn/2019/12/23/skr-lottery/)
+> 上篇文章回顾 [《Skr-Shop通用抽奖工具之需求分析》](http://tigerb.cn/2019/12/23/skr-lottery/)
 
 需求已经分析完了，今天我们就来看看这通用抽奖工具具体的设计，分为如下三个部分：
 
@@ -142,7 +142,7 @@ CREATE TABLE `glue_user_draw_record` (
     </a>
 </p>
 
-#### 创建活动场次-按时间抽奖
+#### 创建活动场次-按数额范围区间抽奖
 
 <p align="center">
     <a href="http://cdn.tigerb.cn/20191230081157.png?imageMogr2/thumbnail/971x2069!/format/webp/blur/1x0/quality/75%7Cimageslim" data-lightbox="roadtrip">
@@ -150,15 +150,11 @@ CREATE TABLE `glue_user_draw_record` (
     </a>
 </p>
 
-#### 创建活动场次-按抽奖次数抽奖
-
 <p align="center">
     <a href="http://cdn.tigerb.cn/20191229224543.png?imageMogr2/thumbnail/971x2214!/format/webp/blur/1x0/quality/75%7Cimageslim" data-lightbox="roadtrip">
         <img src="http://cdn.tigerb.cn/20191229224543.png?imageMogr2/thumbnail/971x2214!/format/webp/blur/1x0/quality/75%7Cimageslim" width="66%">
     </a>
 </p>
-
-#### 创建活动场次-按数额范围区间抽奖
 
 <p align="center">
     <a href="http://cdn.tigerb.cn/20191229224834.png?imageMogr2/thumbnail/971x1693!/format/webp/blur/1x0/quality/75%7Cimageslim" data-lightbox="roadtrip">
