@@ -1,7 +1,5 @@
 # 优惠券服务
 
-https://www.processon.com/view/link/5ea51bc95653bb6efc6d58b9
-
 ## 优惠券属性
 
 ### 有效期维度
