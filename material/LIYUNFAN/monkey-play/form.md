@@ -68,3 +68,6 @@
 实际上这个需要参考具体的成本。种子越难提前预测，难度越高。
 
 例如开奖时间的时间戳很容易获得，而未来某个时间后的第一个区块链的哈希值却很难预测。
+
+# 总结
+![form-summary](https://github.com/skr-shop/manuals/blob/master/material/LIYUNFAN/monkey-play/assert/form-1.png?raw=true)
