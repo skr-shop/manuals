@@ -12,9 +12,10 @@
     <img style="vertical-align:middle" width="60%" src="http://cdn.tigerb.cn/20191222164829.jpg?imageMogr2/thumbnail/1280x720!/format/webp/blur/1x0/quality/90|imageslim">
 <p>
 
-# 版权申明
+# 版权声明
 - 未经版权所有者明确授权，禁止发行本手册及其被实质上修改的版本。 
 - 未经版权所有者事先授权，禁止将此作品及其衍生作品以标准（纸质）书籍形式发行。  
+- 未与任何第三方以任何形式合作。
 
 <p align="center">
     <img style="vertical-align:middle" width="25%" src="http://cdn.tigerb.cn/wechat-blog-qrcode.jpg?imageMogr2/thumbnail/260x260!/format/webp/blur/1x0/quality/90|imageslim">
