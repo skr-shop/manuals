@@ -142,4 +142,4 @@ AStraw|研究生创业者|公众号“稻草人生”
 大愚Dayu|国内大多人使用的PHP第三方支付聚合项目[Payment](https://github.com/helei112g/payment)作者，创过业|[大愚Talk](http://dayutalk.cn/)
 lwhcv|曾就职于百度/融360|--------
 TIGERB|PHP框架[EasyPHP](http://easy-php.tigerb.cn/#/)作者| [TIGERB的技术博客](http://tigerb.cn)
-Veaer|宇宙无敌风火轮全干工程师| [Veaer](https://github.com/Veaer)
+Veaer|宇宙无敌风火轮全干工程师| [Veaer](http://veaer.com)
