@@ -148,6 +148,6 @@
 
 <p align="center">
     <a href="http://cdn.tigerb.cn/20200802220914.png">
-        <img src="http://cdn.tigerb.cn/20200802220914.png" width="80%">
+        <img src="http://cdn.tigerb.cn/20200802220914.png" width="50%">
     </a>
 </p>

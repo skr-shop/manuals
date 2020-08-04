@@ -1,0 +1,36 @@
+- [前言](/)
+- [目录](/guide)
+- [技术栈选型](/?id=技术栈选型)
+- [代码仓库](/?id=代码仓库)
+- [用户体系](/src/account/?id=用户体系)
+    + [账户服务](/src/account/?id=架构设计)
+    + [权限服务](/src/account/?id=后台权限管理)
+- [购物体系](/src/shopping/cart?id=购物体系)
+    + [商品系统(Temporal万物)](/src/shopping/product?id=商品系统)
+    + [购物车服务](/src/shopping/cart?id=购物车服务)
+    + [购物车架构](/src/shopping/cart?id=购物车架构)
+- [营销体系](/src/promotion/)
+    + 活动营销系统
+        * [通用抽奖工具(Glue万能胶)](/src/promotion/glue)
+    + 销售营销系统
+    + 基础服务
+        * [秒杀服务](/src/promotion/seckill)
+        * [优惠券服务](/src/promotion/coupon)
+        * 积分服务
+- [交易中心](/src/trade/)
+    + [常见第三方支付流程](/src/trade/?id=常见第三方支付流程)
+    + [支付系统设计](/src/trade/?id=支付系统设计)
+    + 收银台
+- [订单中心](/src/order/)
+- [仓储系统](/src/warehouse/)
+    + 地址服务
+- [物流系统](/src/express/)
+- [售后服务](/src/aftersale/)
+- [基础服务](/src/base/)
+    + 接口静态化服务
+    + 上传服务
+    + 消息服务
+        * 短信
+        * 邮件
+        * 微信模板消息
+        * 站内信
