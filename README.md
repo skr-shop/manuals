@@ -38,7 +38,7 @@
 # 目录
 
 - [前言](http://skrshop.tech/#/)
-- [目录](http://skrshop.tech/#/guide/)
+- [目录](http://skrshop.tech/#/guide)
 - [技术栈选型](http://skrshop.tech/#/?id=技术栈选型)
 - [代码仓库](http://skrshop.tech/#/?id=代码仓库)
 - [用户体系](http://skrshop.tech/#/src/account/?id=用户体系)
