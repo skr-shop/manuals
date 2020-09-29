@@ -356,7 +356,7 @@ CREATE TABLE IF NOT EXISTS `pay_transaction_extension` (
   `create_at` INT UNSIGNED NOT NULL DEFAULT 0 COMMENT '创建时间',
   `create_ip` INT UNSIGNED NOT NULL COMMENT '创建ip',
   PRIMARY KEY (`id`),
-  INDEX `idx_trads` (`transaction_id`, `pay_status`),
+  INDEX `idx_trads` (`transaction_id`),
   UNIQUE INDEX `uniq_code` (`transaction_code`)),
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
