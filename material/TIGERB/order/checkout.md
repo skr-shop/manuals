@@ -1,14 +1,14 @@
 # 订单结算页面
 
+某东的订单结算页面
+
 <p align="center">
     <a href="http://cdn.tigerb.cn/20200331124724.jpeg" data-lightbox="roadtrip">
         <img src="http://cdn.tigerb.cn/20200331124724.jpeg" width="66%">
     </a>
 </p>
 
-```
-
-```
+某宝的订单结算页面
 
 <p align="center">
     <a href="http://cdn.tigerb.cn/20200929124345.jpeg" data-lightbox="roadtrip">
@@ -16,12 +16,12 @@
     </a>
 </p>
 
-```
-```
+
+模块化拆分
 
 <p align="center">
-    <a href="http://cdn.tigerb.cn/20200329222214.png" data-lightbox="roadtrip">
-        <img src="http://cdn.tigerb.cn/20200329222214.png" width="66%">
+    <a href="http://cdn.tigerb.cn/20201014203046.png" data-lightbox="roadtrip">
+        <img src="http://cdn.tigerb.cn/20201014203046.png" width="66%">
     </a>
 </p>
 
@@ -78,7 +78,7 @@ latitude|string|-|-|纬度
 
 <p align="center">
     <a href="http://cdn.tigerb.cn/20201010203421.png" data-lightbox="roadtrip">
-        <img src="http://cdn.tigerb.cn/20201010203421.png" width="86%">
+        <img src="http://cdn.tigerb.cn/20201010203421.png" width="100%">
     </a>
 </p>
 
@@ -104,7 +104,7 @@ pay_method_list|array|desc|string|支付方式描述
 
 <p align="center">
     <a href="http://cdn.tigerb.cn/20201010203818.png" data-lightbox="roadtrip">
-        <img src="http://cdn.tigerb.cn/20201010203818.png" width="86%">
+        <img src="http://cdn.tigerb.cn/20201010203818.png" width="100%">
     </a>
 </p>
 
@@ -123,28 +123,22 @@ pay_method_list|array|desc|string|支付方式描述
 
 ## 店铺模块
 
-> 
+> 包含店铺信息、商品信息、参与的优惠信息、可选的物流方式、商品售后信息等
 
-：
+店铺模块由如下子模块组成：
 
-- 
-- 
-
-字段名称|类型|下级字段名称|类型|字段含义
-------|------|------|------|------
-pay_method_list|array|id|int|支付方式ID
-
+- 商品模块
+    + 商品基础信息模块
+    + 商品优惠信息模块
+    + 售后模块
+- 商品物流模块
+- 店铺商品总金额信息模块
 
 <p align="center">
-    <a href="" data-lightbox="roadtrip">
-        <img src="" width="86%">
+    <a href="http://cdn.tigerb.cn/20201014203138.png" data-lightbox="roadtrip">
+        <img src="http://cdn.tigerb.cn/20201014203138.png" width="36%">
     </a>
 </p>
-
-模块数据demo：
-```json
-
-```
 
 ## 发票模块
 
@@ -189,11 +183,12 @@ coupon_list|array|start_at|int64|优惠券生效开始时间戳
 coupon_list|array|end_at|int64|优惠券生效结束时间戳
 coupon_list|array|status|emum|优惠券状态
 coupon_list|array|is_selected|bool|是否选中
+coupon_list|array|can_use|bool|该订单是否可用，不可用一般放列表最后面
 
 
 <p align="center">
     <a href="http://cdn.tigerb.cn/20201011213027.png" data-lightbox="roadtrip">
-        <img src="http://cdn.tigerb.cn/20201011213027.png" width="86%">
+        <img src="http://cdn.tigerb.cn/20201011213027.png" width="100%">
     </a>
 </p>
 
@@ -230,6 +225,28 @@ gift_card_list|array|total_amount_txt|string|礼品卡初始总金额
 
 ```
 
+## 平台积分模块
+
+> 
+
+比如某东叫京豆
+
+字段名称|类型|下级字段名称|类型|字段含义
+------|------|------|------|------
+skus_amount|float64|-|-|商品的总金额
+
+
+<p align="center">
+    <a href="" data-lightbox="roadtrip">
+        <img src="" width="100%">
+    </a>
+</p>
+
+模块数据demo：
+```json
+
+```
+
 ## 订单金额信息模块
 
 > 包含该订单的金额明细
@@ -247,7 +264,7 @@ promotion_detail|object|gift_cart_amount|float64|礼品卡使用金额
 
 <p align="center">
     <a href="http://cdn.tigerb.cn/20201011224511.png" data-lightbox="roadtrip">
-        <img src="http://cdn.tigerb.cn/20201011224511.png" width="86%">
+        <img src="http://cdn.tigerb.cn/20201011224511.png" width="100%">
     </a>
 </p>
 
