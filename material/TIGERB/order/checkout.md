@@ -2,35 +2,60 @@
 
 ## 前言
 
+截止目前为止SkrShop《电商设计手册》系列梳理的内容已经涵盖了如下几大块：
+
+- 用户
+- 商品
+- 购物车
+- 营销
+- 支付
+
+今天我们准备开启一个新的篇章 **订单**，订单系列主要会梳理如下几大块内容：
+
+- 订单结算页面
+- 创建订单
+- 订单履约
+- 订单状态
+- 订单详情
+- 等等内容
+
+接着，在正式开始今天的内容之前，我们先来复习或者回顾下，一个典型电商的购物流程，如下图：
+
 <p align="center">
     <a href="http://cdn.tigerb.cn/20201015193036.png" data-lightbox="roadtrip">
-        <img src="http://cdn.tigerb.cn/20201015193036.png" width="66%">
+        <img src="http://cdn.tigerb.cn/20201015193036.png" width="80%">
     </a>
 </p>
+
+重点来了，今天的这篇文章我们主要就来聊聊上面流程中**订单结算页面**的设计与实现。
 
 ## 订单结算页面长啥样？
 
-某东的订单结算页面
+我们来看看某东的订单结算页面：
 
 <p align="center">
     <a href="http://cdn.tigerb.cn/20200331124724.jpeg" data-lightbox="roadtrip">
-        <img src="http://cdn.tigerb.cn/20200331124724.jpeg" width="66%">
+        <img src="http://cdn.tigerb.cn/20200331124724.jpeg" width="36%">
     </a>
 </p>
 
-某宝的订单结算页面
+再来看看某宝的订单结算页面：
 
 <p align="center">
     <a href="http://cdn.tigerb.cn/20200929124345.jpeg" data-lightbox="roadtrip">
-        <img src="http://cdn.tigerb.cn/20200929124345.jpeg" width="66%">
+        <img src="http://cdn.tigerb.cn/20200929124345.jpeg" width="36%">
     </a>
 </p>
 
+通过上面的截图，我们可以大致得出如下内容：
+
 ## 订单结算页面的组成
+
+我们整理下上面的内容，再通过模块话的方式进行拆分和组合，得到如下订单结算页面的**模块化构成**:
 
 <p align="center">
     <a href="http://cdn.tigerb.cn/20201014203046.png" data-lightbox="roadtrip">
-        <img src="http://cdn.tigerb.cn/20201014203046.png" width="66%">
+        <img src="http://cdn.tigerb.cn/20201014203046.png" width="38%">
     </a>
 </p>
 
@@ -41,15 +66,17 @@
 1|地址模块|-|-|展示用户最优地址
 2|支付方式模块|-|-|该订单支持的支付方式
 3|店铺模块|-|-|包含店铺信息、商品信息、参与的优惠信息、可选的物流方式、商品售后信息等
-3|-|3.1|店铺信息模块|-
-3|-|3.2|商品信息模块|-
+3|-|3.1|店铺模块|-
+3|-|3.2|商品模块|-
+3|-|3.2.1|商品基础信息模块|商品的信息，名称、图片、价格、库存等
+3|-|3.2.2|商品优惠信息模块|选择的销售活动优惠选项
+3|-|3.2.2|售后模块|商品享有的售后权益信息
 3|-|3.3|物流模块|可选择的配送方式
-3|-|3.4|售后模块|商品享有的售后权益信息
-3|-|3.5|优惠模块|可选择的销售活动优惠选项
-3|-|3.6|店铺商品金额信息模块|-
+3|-|3.4|店铺商品金额信息模块|-
 4|发票模块|-|-|选择开发票的类型、补充发票信息
 5|优惠券模块|-|-|展示该订单可以使用的优惠券列表
 6|礼品卡模块|-|-|展示可以选择使用礼品卡列表
+6|平台积分模块|-|-|用户可以使用积分抵掉部分现金
 7|订单金额信息模块|-|-|包含该订单的金额明细
 
 ## 地址模块
@@ -189,6 +216,8 @@ pay_method_list|array|desc|string|支付方式描述
     </a>
 </p>
 
+由于此处内容比较多我们之后再来单独分析。
+
 ## 发票模块
 
 > 用户选择开发票的类型以及补充发票信息
@@ -242,14 +271,14 @@ type_desc|string|-|-|发票类型描述
 
 字段名称|类型|下级字段名称|类型|字段含义
 ------|------|------|------|------
-gift_card_list|array|id|int64|礼品卡id
-gift_card_list|array|name|string|礼品卡名称
-gift_card_list|array|desc|string|礼品卡描述
-gift_card_list|array|pic_url|string|礼品卡图片
-gift_card_list|array|total_amount|float64|礼品卡初始总金额
-gift_card_list|array|total_amount_txt|string|礼品卡初始总金额-格式化后
-gift_card_list|array|remaining_amount|float64|礼品卡剩余金额
-gift_card_list|array|remaining_amount_txt|string|礼品卡剩余金额-格式化后
+giftcard_list|array|id|int64|礼品卡id
+giftcard_list|array|name|string|礼品卡名称
+giftcard_list|array|desc|string|礼品卡描述
+giftcard_list|array|pic_url|string|礼品卡图片
+giftcard_list|array|total_amount|float64|礼品卡初始总金额
+giftcard_list|array|total_amount_txt|string|礼品卡初始总金额-格式化后
+giftcard_list|array|remaining_amount|float64|礼品卡剩余金额
+giftcard_list|array|remaining_amount_txt|string|礼品卡剩余金额-格式化后
 
 
 <p align="center">
@@ -330,7 +359,7 @@ freight|float64|-|-|运费
 final_amount|float64|-|-|支付金额
 promotion_detail|object|coupon_amount|float64|优惠券优惠金额
 promotion_detail|object|sales_activity_amount|float64|销售活动优惠金额
-promotion_detail|object|gift_cart_amount|float64|礼品卡使用金额
+promotion_detail|object|giftcard_amount|float64|礼品卡使用金额
 promotion_detail|object|points_amount|float64|该订单积分抵扣金额
 
 ```
@@ -345,5 +374,24 @@ _txt字段略
 
 模块数据demo：
 ```json
-
+{
+    "skus_amount": 99.99,
+    "skus_amount_txt": "99.99",
+    "promotion_amount_total": 10.00,
+    "promotion_amount_total_txt": "10.00",
+    "freight_total": 8.00,
+    "freight_total_txt": "8.00",
+    "final_amount": 97.99,
+    "final_amount_txt": "97.99",
+    "promotion_detail": {
+        "coupon_amount": 5.00,
+        "coupon_amount_txt": "5.00",
+        "sales_activity_amount": 5.00,
+        "sales_activity_amount_txt": "5.00",
+        "giftcard_amount": 0,
+        "giftcard_activity_amount_txt": "0",
+        "points_amount": 0,
+        "points_amount_txt": "0"
+    }
+}
 ```
