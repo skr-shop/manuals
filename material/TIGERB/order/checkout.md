@@ -1,5 +1,3 @@
-# 一篇文章搞清电商订单结算页面设计？
-
 ## 前言
 
 截止目前为止SkrShop《电商设计手册》系列梳理的内容已经涵盖了如下几大块：
@@ -9,17 +7,29 @@
 - 购物车
 - 营销
 - 支付
+- 基础服务
 
-今天我们准备开启一个新的篇章 **订单**，订单系列主要会梳理如下几大块内容：
+今天我们准备开启一个新的篇章**订单中心**。
 
-- 订单结算页面
-- 创建订单
-- 订单履约
-- 订单状态
-- 订单详情
-- 等等内容
+<p align="center">
+    <a href="http://cdn.tigerb.cn/20201026131854.jpg" data-lightbox="roadtrip">
+        <img src="http://cdn.tigerb.cn/20201026131854.jpg" width="100%">
+    </a>
+</p>
 
-接着，在正式开始今天的内容之前，我们先来复习或者回顾下，一个典型电商的购物流程，如下图：
+订单中心系列主要内容如下：
+
+|知识点|
+|-------|
+|订单结算页|
+|创建订单|
+|订单履约|
+|订单状态|
+|订单详情|
+|订单逆向操作|
+|...|
+
+首先，我们来回顾下用户平常在电商平台上的购物的一个简单过程，如下图所示：
 
 <p align="center">
     <a href="http://cdn.tigerb.cn/20201015193036.png" data-lightbox="roadtrip">
@@ -27,9 +37,14 @@
     </a>
 </p>
 
-重点来了，今天的这篇文章我们主要就来聊聊上面流程中**订单结算页面**的设计与实现。
+> 所以，今天我们来聊聊什么呢？
 
-## 订单结算页面长啥样？
+```
+答：今天的这篇文章我们主要就来聊聊上面流程中『订单结算页』的设计与实现。
+```
+
+
+## 订单结算页长啥样？
 
 我们来看看某东的订单结算页面：
 
@@ -47,17 +62,34 @@
     </a>
 </p>
 
-通过上面的截图，我们可以大致得出如下内容：
+通过上面的截图，我们可以大致得出**订单结算页面**的主要页面内容：
+
+- 用户默认收货地址信息
+- 支付方式选择
+- 店铺&商品信息
+- 商品可选择的配送方式
+- 发票类型选择
+- 优惠信息
+- 订单相关金额
+- 等等
 
 ## 订单结算页面的组成
 
-我们整理下上面的内容，再通过模块话的方式进行拆分和组合，得到如下订单结算页面的**模块化构成**:
+> 我一直在思考前端可以模块化，后端接口数据不可以模块化吗？
+
+```
+我的答案：是可以的。
+```
+
+我们依据上面整理的内容，再通过以往的经验把**订单结算页面**进行模块化拆分和组合，得到如下订单结算页面的**模块化构成**:
 
 <p align="center">
-    <a href="http://cdn.tigerb.cn/20201014203046.png" data-lightbox="roadtrip">
-        <img src="http://cdn.tigerb.cn/20201014203046.png" width="38%">
+    <a href="http://cdn.tigerb.cn/20201026165711.png" data-lightbox="roadtrip">
+        <img src="http://cdn.tigerb.cn/20201026165711.png" width="38%">
     </a>
 </p>
+
+关于这块代码如何设计，可以参考我的文章[《代码组件 | 我的代码没有else》](http://tigerb.cn/go-patterns/#/?id=%e7%bb%84%e5%90%88%e6%a8%a1%e5%bc%8f)
 
 ## 订单结算页面各模块分析
 
@@ -66,18 +98,17 @@
 1|地址模块|-|-|展示用户最优地址
 2|支付方式模块|-|-|该订单支持的支付方式
 3|店铺模块|-|-|包含店铺信息、商品信息、参与的优惠信息、可选的物流方式、商品售后信息等
-3|-|3.1|店铺模块|-
-3|-|3.2|商品模块|-
+3|-|3.1|商品模块|包含子模块：商品基础信息模块、商品优惠信息模块、售后模块
 3|-|3.2.1|商品基础信息模块|商品的信息，名称、图片、价格、库存等
 3|-|3.2.2|商品优惠信息模块|选择的销售活动优惠选项
-3|-|3.2.2|售后模块|商品享有的售后权益信息
+3|-|3.2.3|售后模块|商品享有的售后权益信息
 3|-|3.3|物流模块|可选择的配送方式
 3|-|3.4|店铺商品金额信息模块|-
 4|发票模块|-|-|选择开发票的类型、补充发票信息
 5|优惠券模块|-|-|展示该订单可以使用的优惠券列表
 6|礼品卡模块|-|-|展示可以选择使用礼品卡列表
-6|平台积分模块|-|-|用户可以使用积分抵掉部分现金
-7|订单金额信息模块|-|-|包含该订单的金额明细
+7|平台积分模块|-|-|用户可以使用积分抵掉部分现金
+8|订单金额信息模块|-|-|包含该订单的金额明细
 
 ## 地址模块
 
@@ -94,15 +125,15 @@ consignee|string|-|-|收货人姓名
 email|string|-|-|收货人邮箱(返回值用户名部分打码)
 mobile|string|-|-|收货人手机号(返回值中间四位打码)
 country|object|id|int64|国家ID
-country|pbject|name|string|国家名称
+country|object|name|string|国家名称
 province|object|id|int64|省ID
-province|pbject|name|string|省名称
+province|object|name|string|省名称
 city|object|id|int64|市ID
-city|pbject|name|string|市名称
+city|object|name|string|市名称
 county|object|id|int64|区县ID
-county|pbject|name|string|区县名称
+county|object|name|string|区县名称
 street|object|id|int64|街道乡镇ID
-street|pbject|name|string|街道乡镇名称
+street|object|name|string|街道乡镇名称
 detailed_address|string|-|-|详细地址(用户手填)
 postal_code|string|-|-|邮编
 address_id|int64|-|-|地址ID
@@ -181,7 +212,7 @@ pay_method_list|array|desc|string|支付方式描述
 ```json
 {
     "pay_method_module": {
-        "list": [
+        "pay_method_list": [
             {
                 "id": 1,
                 "name": "在线支付",
@@ -229,7 +260,7 @@ pay_method_list|array|desc|string|支付方式描述
 
 字段名称|类型|下级字段名称|类型|字段含义
 ------|------|------|------|------
-type_id|int|-|-|发票类型,个人；单位
+type_id|int|-|-|发票类型：个人；单位
 type_name|string|-|-|发票类型名称
 type_desc|string|-|-|发票类型描述
 
@@ -264,10 +295,14 @@ type_desc|string|-|-|发票类型描述
 
 > 返回该订单可以使用的优惠券列表，以及默认选择对于当前订单而言的最优优惠券
 
+- 展示用户的优惠券列表：当前订单可用的排最前面其他放最后面
+- 默认选中最优优惠券：对于当前订单优惠力度最大的一张优惠券
+
+关于优惠券的其他内容可以阅读优惠券章节内容。
+
 ## 礼品卡模块
 
 > 展示可以选择使用礼品卡列表
-
 
 字段名称|类型|下级字段名称|类型|字段含义
 ------|------|------|------|------
@@ -282,8 +317,8 @@ giftcard_list|array|remaining_amount_txt|string|礼品卡剩余金额-格式化�
 
 
 <p align="center">
-    <a href="http://cdn.tigerb.cn/20201015200044.png" data-lightbox="roadtrip">
-        <img src="http://cdn.tigerb.cn/20201015200044.png" width="100%">
+    <a href="http://cdn.tigerb.cn/20201026165855.png" data-lightbox="roadtrip">
+        <img src="http://cdn.tigerb.cn/20201026165855.png" width="100%">
     </a>
 </p>
 
@@ -291,7 +326,7 @@ giftcard_list|array|remaining_amount_txt|string|礼品卡剩余金额-格式化�
 ```json
 {
     "giftcard_module": {
-        "list": [
+        "giftcard_list": [
             {
                 "id": 341313121,
                 "name": "礼品卡名称",
@@ -309,9 +344,9 @@ giftcard_list|array|remaining_amount_txt|string|礼品卡剩余金额-格式化�
 
 ## 平台积分模块
 
-> 
+> 用户可以使用积分抵现
 
-比如某东叫京豆
+比如上线某东订单结算页面中的京豆。
 
 字段名称|类型|下级字段名称|类型|字段含义
 ------|------|------|------|------
@@ -375,23 +410,37 @@ _txt字段略
 模块数据demo：
 ```json
 {
-    "skus_amount": 99.99,
-    "skus_amount_txt": "99.99",
-    "promotion_amount_total": 10.00,
-    "promotion_amount_total_txt": "10.00",
-    "freight_total": 8.00,
-    "freight_total_txt": "8.00",
-    "final_amount": 97.99,
-    "final_amount_txt": "97.99",
-    "promotion_detail": {
-        "coupon_amount": 5.00,
-        "coupon_amount_txt": "5.00",
-        "sales_activity_amount": 5.00,
-        "sales_activity_amount_txt": "5.00",
-        "giftcard_amount": 0,
-        "giftcard_activity_amount_txt": "0",
-        "points_amount": 0,
-        "points_amount_txt": "0"
+    "order_amount_module": {
+        "skus_amount": 99.99,
+        "skus_amount_txt": "99.99",
+        "promotion_amount_total": 10.00,
+        "promotion_amount_total_txt": "10.00",
+        "freight_total": 8.00,
+        "freight_total_txt": "8.00",
+        "final_amount": 97.99,
+        "final_amount_txt": "97.99",
+        "promotion_detail": {
+            "coupon_amount": 5.00,
+            "coupon_amount_txt": "5.00",
+            "sales_activity_amount": 5.00,
+            "sales_activity_amount_txt": "5.00",
+            "giftcard_amount": 0,
+            "giftcard_activity_amount_txt": "0",
+            "points_amount": 0,
+            "points_amount_txt": "0"
+        }
     }
 }
+```
+
+## 结语
+
+如上，订单结算页面的内容基本介绍完毕了，有任何问题随时到我们的github项目下留言 <https://github.com/skr-shop/manuals/issues>。
+
+
+```
+关于我的常用画图软件：
+
+1. Balsamiq Mockups 3
+2. Processon
 ```
