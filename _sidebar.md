@@ -22,6 +22,7 @@
     + [支付系统设计](/src/trade/?id=支付系统设计)
     + 收银台
 - [订单中心](/src/order/)
+    + [订单结算页](/src/order/checkout)
 - [仓储系统](/src/warehouse/)
     + 地址服务
 - [物流系统](/src/express/)

@@ -23,6 +23,23 @@
     <i style="display:inline-block; height:100%; vertical-align:middle; width:0;"></i>
 <p>
 
+# 大厂内推
+
+
+## 抖音电商
+
+<p align="center">
+<img style="vertical-align:middle" width="25%" src="./material/Dayu/img/bytedance.jpeg">
+</p>
+
+```txt
+1. 超高速发展的业务；意味着：技术挑战大、发挥空间大、钱多！
+2. 业务最新技术全落地；微服务、ServiceMesh、Faas 都已经有落地方案，你可以通过内部资料学习；
+3. 技术氛围好；内部每周都有基础技术团队分享，相同业务随时约会交流，没有部门壁垒；
+欢迎将简历投递至我的邮箱：**dayugog@gmail.com** 
+不限年限，只要你敢投，我就敢帮你推，快上车~
+```
+
 # Star趋势
 
 [![Stargazers over time](https://starchart.cc/skr-shop/manuals.svg)](https://starchart.cc/skr-shop/manuals)
@@ -61,6 +78,7 @@
     + [支付系统设计](http://skrshop.tech/#/src/trade/?id=支付系统设计)
     + 收银台
 - [订单中心](http://skrshop.tech/#/src/order/)
+    + [订单结算页](http://skrshop.tech/#/src/order/checkout)
 - [仓储系统](http://skrshop.tech/#/src/warehouse/)
     + 地址服务
 - [物流系统](http://skrshop.tech/#/src/express/)
