@@ -61,6 +61,7 @@
     + [支付系统设计](http://skrshop.tech/#/src/trade/?id=支付系统设计)
     + 收银台
 - [订单中心](http://skrshop.tech/#/src/order/)
+    + [订单结算页](http://skrshop.tech/#/src/order/checkout)
 - [仓储系统](http://skrshop.tech/#/src/warehouse/)
     + 地址服务
 - [物流系统](http://skrshop.tech/#/src/express/)
