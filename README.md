@@ -25,20 +25,17 @@
 
 # 大厂内推
 
+为大家提供各个大厂渠道的内推。
 
 ## 抖音电商
 
-<p align="center">
-<img style="vertical-align:middle" width="25%" src="./material/Dayu/img/bytedance.jpeg">
-</p>
-
-```txt
 1. 超高速发展的业务；意味着：技术挑战大、发挥空间大、钱多！
 2. 业务最新技术全落地；微服务、ServiceMesh、Faas 都已经有落地方案，你可以通过内部资料学习；
 3. 技术氛围好；内部每周都有基础技术团队分享，相同业务随时约会交流，没有部门壁垒；
-欢迎将简历投递至我的邮箱：**dayugog@gmail.com** 
+
+欢迎将简历投递至我的邮箱：<a href="mailto:dayugog@gmail.com?subject=【字节】我要内推" rel="nofollow">我要内推</a>
+<br>
 不限年限，只要你敢投，我就敢帮你推，快上车~
-```
 
 # Star趋势
 
