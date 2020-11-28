@@ -37,6 +37,20 @@
 <br>
 不限年限，只要你敢投，我就敢帮你推，快上车~
 
+## 小米海外电商
+
+- 简介：小米网海外电商平台
+- 技术栈：Go
+- 挑战，期待和你一起来解决：
+    + 全球化翻译问题
+    + 全球多机房问题
+    + 海外快速复制电商系统平台问题
+    + 反黄牛
+
+如果你对这些挑战很感兴趣，欢迎将简历投递至我的邮箱：**tigerbcode@gmail.com**
+<br>
+不限年限，只要你敢投，我就敢帮你推，快上车~
+
 # Star趋势
 
 [![Stargazers over time](https://starchart.cc/skr-shop/manuals.svg)](https://starchart.cc/skr-shop/manuals)
