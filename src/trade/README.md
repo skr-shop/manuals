@@ -323,7 +323,7 @@ CREATE TABLE IF NOT EXISTS `pay_transaction` (
   `return_url` VARCHAR(255) NOT NULL COMMENT '支付后跳转url',
   `notify_url` VARCHAR(255) NOT NULL COMMENT '支付后，异步通知url',
   `email` VARCHAR(64) NOT NULL COMMENT '用户的邮箱',
-  `sing_type` VARCHAR(10) NOT NULL DEFAULT 'RSA' COMMENT '采用的签方式：MD5 RSA RSA2 HASH-MAC等',
+  `sign_type` VARCHAR(10) NOT NULL DEFAULT 'RSA' COMMENT '采用的签方式：MD5 RSA RSA2 HASH-MAC等',
   `intput_charset` CHAR(5) NOT NULL DEFAULT 'UTF-8' COMMENT '字符集编码方式',
   `payment_time` INT UNSIGNED NOT NULL DEFAULT 0 COMMENT '第三方支付成功的时间',
   `notify_time` INT UNSIGNED NOT NULL DEFAULT 0 COMMENT '收到异步通知的时间',
