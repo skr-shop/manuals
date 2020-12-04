@@ -323,7 +323,7 @@ CREATE TABLE IF NOT EXISTS `pay_transaction` (
   `return_url` VARCHAR(255) NOT NULL COMMENT '支付后跳转url',
   `notify_url` VARCHAR(255) NOT NULL COMMENT '支付后，异步通知url',
   `email` VARCHAR(64) NOT NULL COMMENT '用户的邮箱',
-  `sing_type` VARCHAR(10) NOT NULL DEFAULT 'RSA' COMMENT '采用的签方式：MD5 RSA RSA2 HASH-MAC等',
+  `sign_type` VARCHAR(10) NOT NULL DEFAULT 'RSA' COMMENT '采用的签方式：MD5 RSA RSA2 HASH-MAC等',
   `intput_charset` CHAR(5) NOT NULL DEFAULT 'UTF-8' COMMENT '字符集编码方式',
   `payment_time` INT UNSIGNED NOT NULL DEFAULT 0 COMMENT '第三方支付成功的时间',
   `notify_time` INT UNSIGNED NOT NULL DEFAULT 0 COMMENT '收到异步通知的时间',
@@ -338,7 +338,7 @@ CREATE TABLE IF NOT EXISTS `pay_transaction` (
   PRIMARY KEY (`id`),
   UNIQUE INDEX `uniq_tradid` (`transaction_id`),
   INDEX `idx_trade_no` (`trade_no`),
-  INDEX `idx_ctime` (`create_at`)),
+  INDEX `idx_ctime` (`create_at`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
 COMMENT = '发起支付的数据';
@@ -357,7 +357,7 @@ CREATE TABLE IF NOT EXISTS `pay_transaction_extension` (
   `create_ip` INT UNSIGNED NOT NULL COMMENT '创建ip',
   PRIMARY KEY (`id`),
   INDEX `idx_trads` (`transaction_id`),
-  UNIQUE INDEX `uniq_code` (`transaction_code`)),
+  UNIQUE INDEX `uniq_code` (`transaction_code`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
 COMMENT = '交易扩展表';
@@ -376,7 +376,7 @@ CREATE TABLE IF NOT EXISTS `pay_log_data` (
   `create_at` INT UNSIGNED NOT NULL DEFAULT 0 COMMENT '创建时间',
   `create_ip` INT UNSIGNED NOT NULL DEFAULT 0 COMMENT '创建ip',
   PRIMARY KEY (`id`),
-  INDEX `idx_tradt` (`transaction_id`, `log_type`)),
+  INDEX `idx_tradt` (`transaction_id`, `log_type`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
 COMMENT = '交易日志表';
@@ -403,7 +403,7 @@ CREATE TABLE IF NOT EXISTS `pay_repeat_transaction` (
   PRIMARY KEY (`id`),
   INDEX `idx_trad` ( `transaction_id`),
   INDEX `idx_method` (`pay_method_id`),
-  INDEX `idx_time` (`create_at`)),
+  INDEX `idx_time` (`create_at`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
 COMMENT = '记录重复支付';
@@ -431,8 +431,8 @@ CREATE TABLE IF NOT EXISTS `pay_notify_app_log` (
   `update_at` INT UNSIGNED NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`),
   INDEX `idx_trad` (`transaction_id`),
-  INDEX `idx_app` (`app_id`, `notify_status`)
-  INDEX `idx_time` (`create_at`)),
+  INDEX `idx_app` (`app_id`, `notify_status`),
+  INDEX `idx_time` (`create_at`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
 COMMENT = '支付调用方记录';
@@ -465,7 +465,7 @@ CREATE TABLE IF NOT EXISTS `pay_refund` (
   UNIQUE INDEX `uniq_refno` (`refund_no`),
   INDEX `idx_trad` (`transaction_id`),
   INDEX `idx_status` (`refund_status`),
-  INDEX `idx_ctime` (`create_at`)),
+  INDEX `idx_ctime` (`create_at`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
 COMMENT = '退款记录';
