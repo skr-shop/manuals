@@ -366,7 +366,7 @@ COMMENT = '交易扩展表';
 -- Table 交易系统全部日志
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `pay_log_data` (
-  `id` BIGINT UNSIGNED NOT NULL,
+  `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
   `app_id` VARCHAR(32) NOT NULL COMMENT '应用id',
   `app_order_id` VARCHAR(64) NOT NULL COMMENT '应用方订单号',
   `transaction_id` VARCHAR(64) NOT NULL COMMENT '本次交易唯一id，整个支付系统唯一，生成他的原因主要是 order_id对于其它应用来说可能重复',
@@ -386,7 +386,7 @@ COMMENT = '交易日志表';
 -- Table 重复支付的交易
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `pay_repeat_transaction` (
-  `id` BIGINT UNSIGNED NOT NULL,
+  `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
   `app_id` VARCHAR(32) NOT NULL COMMENT '应用的id',
   `transaction_id` VARCHAR(64) NOT NULL COMMENT '系统唯一识别交易号',
   `transaction_code` VARCHAR(64) NOT NULL COMMENT '支付成功时，该笔交易的 code',
