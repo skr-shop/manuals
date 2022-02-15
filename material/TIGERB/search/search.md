@@ -186,23 +186,24 @@
 
 # 由浅到深入门搜索原理
 
-上中下三部分，由简到繁
+上中下三部分，由简到繁。
 
 上部：了解基本结构&认识分析器。
 
+- 搜索引擎ES的诞生
 - 最简易的搜索过程
     + 第一部分：索引(动词)数据的过程
     + 第二部分：用户使用Query查询的过程
-- 介绍索引(动词)数据的过程
+- 索引(动词)数据过程解析
     + 简易版本
     + 概念解释：倒排索引
     + 稍微复杂版本：引入分析器
         * 分析器的组成
         * 分析器每部分的作用
-- 介绍用户使用Query查询的过程
+- 用户使用Query查询过程解析
     + 简易版本
     + 稍复杂版本：引入分析器
-- 得到一个重要的结论：索引(动词)数据的过程和Query查询的过程都使用了分析器。
+- 重要结论：索引(动词)数据的过程和Query查询的过程都使用了分析器。
     + 为什么必须是相同的分析器？
     + 合并以上全部过程
 
@@ -221,30 +222,89 @@
         * 逆文档率：idf(Inverse Document Frequent)
     + 精排
 
-最后总结。
+同时，本篇文章会涉及如下概念：
 
-## 最简易搜索过程
+搜索名词概念|描述
+------|------
+索引(动词)|？
+索引(名词)|？
+倒排索引(Inverted Index)|？
+关键字(Query)|？
+文档(Doc)|？
+词条(Term)|？
+召回(Recall)|？
+粗排|？
+tf/idf|？
+精排|？
 
-基于搜索引擎实现，业界比较出名的开源搜索引擎ES(Elasticsearch)，下文简称ES，最简单的搜索过程过程如下：
+我们会在上中下三部分内容中逐步揭盖这些概念的面纱。聊搜索一定离不开「搜索引擎」，所以我们首先来看看「搜索引擎」(本文均以Elasticsearch为例)的诞生。
 
-- 第1步：索引(动词)数据，需要被搜索到源数据被索引(动词)到搜索引擎中，并建立索引(名词)
-- 第2步：用户使用Query查询的过程，用户输入关键词(Query)，搜索引擎分析Query并返回数据
+## 搜索引擎ES的诞生
+
+诞生于一个开源的JAVA库`Lucene`。通过`Lucene`官网的描述我们可以发现：
+
+- `Lucene`是一个JAVA库
+- `Lucene`实现了拼写检查
+- `Lucene`实现了命中字符高亮
+- `Lucene`实现了分析、分词功能
 
 <p align="center">
-    <a href="http://cdn.tigerb.cn/20220129182415.png" data-lightbox="roadtrip">
-        <img src="http://cdn.tigerb.cn/20220129182415.png" style="width:66%">
+    <a href="http://cdn.tigerb.cn/20220215203335.png" data-lightbox="roadtrip">
+        <img src="http://cdn.tigerb.cn/20220215203335.png" style="width:66%">
     </a>
 </p>
 
-## 介绍索引(动词)数据的过程
+多年之前一名名叫`Shay Banon`的开发者，通过`Lucene`实现了一个高可用的开源分布式搜索引擎`Elasticsearch`。
+
+<p align="center">
+    <a href="http://cdn.tigerb.cn/20220215203346.png" data-lightbox="roadtrip">
+        <img src="http://cdn.tigerb.cn/20220215203346.png" style="width:66%">
+    </a>
+</p>
+
+常见的搜索功能都是基于「搜索引擎」实现的。接着我们来看看**最简易搜索过程**。
+
+## 最简易搜索过程
+
+本文都以业界比较出名的开源搜索引擎ES(Elasticsearch)为例来介绍，下文简称ES。
+
+一般来说最简单的搜索过程过程如下：
+
+- 第①步：索引(动词)数据，需要被搜索到源数据被索引(动词)到搜索引擎中，并建立索引(名词)
+- 第②步：用户使用Query查询的过程，用户输入关键字(Query)，搜索引擎分析Query并返回数据
+
+<p align="center">
+    <a href="http://cdn.tigerb.cn/20220215132138.png" data-lightbox="roadtrip">
+        <img src="http://cdn.tigerb.cn/20220215132138.png" style="width:39%">
+    </a>
+</p>
+
+这里提到了「索引(动词)」、「索引(名词)」名词的概念：
+
+搜索名词概念|描述
+------|------
+索引(动词)✅|把源数据写入到搜索引擎的过程，称之为索引的过程。
+索引(名词)✅|索引的过程产生的结果，称之为索引。
+倒排索引(Inverted Index)|？
+关键字(Query)|？
+文档(Doc)|？
+词条(Term)|？
+召回(Recall)|？
+粗排|？
+tf/idf|？
+精排|？
+
+把①、②步拆解来看，首先来看「索引(动词)数据」的过程。
+
+## 索引(动词)数据过程解析
 
 先来看看第一步索引源数据的过程。
 
 ### 简易版本
 
 简单来看：
-1. 就是同步源数据到搜索引擎
-2. 搜索引擎建立索引
+1. 首先，同步源数据到搜索引擎
+2. 接着，搜索引擎建立索引
 
 <p align="center">
     <a href="http://cdn.tigerb.cn/20220129183509.png" data-lightbox="roadtrip">
@@ -252,9 +312,11 @@
     </a>
 </p>
 
+搜索引擎使用的是「倒排索引」，在进一步细化索引源数据过程之前，我们来看一个概念「倒排索引」。
+
 ### 概念解释：倒排索引
 
-在进一步细化索引源数据过程之前，我们来看一个概念「倒排索引」。「倒排索引」就是上述索引(动词)源数据时，创建的索引(名词)的具体实现。
+「倒排索引」就是上述索引(动词)源数据时，创建的索引(名词)的具体实现。
 
 概念：
 - 文档(doc)：需要被搜索的文本内容，可以是商品信息、网页信息等等文本。
@@ -310,7 +372,24 @@ SkrShop|1
 - 搜索`电商`就能快速找到文档1、2、3
 - 搜索`营销`就能快速找到文档2
 
+(这个过程叫做召回)
+
 以上就是「倒排索引」的概念。
+
+这里提到了「倒排索引」、「文档(Doc)」、「词条(Term)」名词的概念：
+
+搜索名词概念|描述
+------|------
+索引(动词)|把源数据写入到搜索引擎的过程，称之为索引的过程。
+索引(名词)|索引的过程产生的结果，称之为索引。
+倒排索引(Inverted Index)✅|索引(动词)源数据时，创建的索引(名词)的具体实现。
+关键字(Query)|？
+文档(Doc)✅|源数据文本被称之为文档
+词条(Term)✅|文档被分词器分解成多个短语称之为词条
+召回(Recall)✅|搜索引擎利用倒排索引，通过词条获取相关文档的过程。
+粗排|？
+tf/idf|？
+精排|？
 
 ### 稍复杂版本：引入分析器
 
@@ -322,7 +401,7 @@ SkrShop|1
 
 <p align="center">
     <a href="http://cdn.tigerb.cn/20220129183541.png" data-lightbox="roadtrip">
-        <img src="http://cdn.tigerb.cn/20220129183541.png" style="width:66%">
+        <img src="http://cdn.tigerb.cn/20220129183541.png" style="width:50%">
     </a>
 </p>
 
@@ -332,7 +411,7 @@ SkrShop|1
 
 <p align="center">
     <a href="http://cdn.tigerb.cn/20220129183701.png" data-lightbox="roadtrip">
-        <img src="http://cdn.tigerb.cn/20220129183701.png" style="width:60%">
+        <img src="http://cdn.tigerb.cn/20220129183701.png" style="width:50%">
     </a>
 </p>
 
@@ -348,7 +427,7 @@ SkrShop|1
 
 <p align="center">
     <a href="http://cdn.tigerb.cn/20220129183714.png" data-lightbox="roadtrip">
-        <img src="http://cdn.tigerb.cn/20220129183714.png" style="width:60%">
+        <img src="http://cdn.tigerb.cn/20220129183714.png" style="width:50%">
     </a>
 </p>
 
@@ -365,8 +444,8 @@ SkrShop|1
 - 等等...
 
 <p align="center">
-    <a href="http://cdn.tigerb.cn/20220129183731.png" data-lightbox="roadtrip">
-        <img src="http://cdn.tigerb.cn/20220129183731.png" style="width:60%">
+    <a href="http://cdn.tigerb.cn/20220215205418.png" data-lightbox="roadtrip">
+        <img src="http://cdn.tigerb.cn/20220215205418.png" style="width:50%">
     </a>
 </p>
 
@@ -382,15 +461,28 @@ SkrShop|1
 
 分析就是把文档文本标准化的过程。
 
-## 介绍用户使用Query查询的过程
+## 用户使用Query查询过程解析
 
 ### 简易版本
 
 <p align="center">
-    <a href="http://cdn.tigerb.cn/20220129185510.png" data-lightbox="roadtrip">
-        <img src="http://cdn.tigerb.cn/20220129185510.png" style="width:30%">
+    <a href="http://cdn.tigerb.cn/20220215205523.png" data-lightbox="roadtrip">
+        <img src="http://cdn.tigerb.cn/20220215205523.png" style="width:30%">
     </a>
 </p>
+
+搜索名词概念|描述
+------|------
+索引(动词)|把源数据写入到搜索引擎的过程，称之为索引的过程。
+索引(名词)|索引的过程产生的结果，称之为索引。
+倒排索引(Inverted Index)|索引(动词)源数据时，创建的索引(名词)的具体实现。
+关键字(Query)✅|发起搜索是用户输入的关键字
+文档(Doc)|源数据文本被称之为文档
+词条(Term)|文档被分词器分解成多个短语称之为词条
+召回(Recall)|搜索引擎利用倒排索引，通过词条获取相关文档的过程。
+粗排|？
+tf/idf|？
+精排|？
 
 ### 稍微复杂版本：引入分析器
 
@@ -472,6 +564,8 @@ SkrShop|1
 - 创建倒排索引：索引(动词)数据得到索引(名词)
 - 召回数据
 - 排序
+    + 粗排
+    + 精排
 
 召回数据之后，你怎么知道docs应该按什么样的顺序排列呢？
 
