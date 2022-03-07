@@ -67,16 +67,16 @@ ES诞生于一个开源的JAVA库`Lucene`。通过`Lucene`官网的描述我们�
 - 等等
 
 <p align="center">
-    <a href="http://cdn.tigerb.cn/20220215203335.png" data-lightbox="roadtrip">
-        <img src="http://cdn.tigerb.cn/20220215203335.png" style="width:66%">
+    <a href="https://cdn.tigerb.cn/20220215203335.png" data-lightbox="roadtrip">
+        <img src="https://cdn.tigerb.cn/20220215203335.png" style="width:66%">
     </a>
 </p>
 
 所以多年之前名叫`Shay Banon`的开发者，通过`Lucene`实现了一个高可用的开源分布式搜索引擎`Elasticsearch`。
 
 <p align="center">
-    <a href="http://cdn.tigerb.cn/20220215203346.png" data-lightbox="roadtrip">
-        <img src="http://cdn.tigerb.cn/20220215203346.png" style="width:66%">
+    <a href="https://cdn.tigerb.cn/20220215203346.png" data-lightbox="roadtrip">
+        <img src="https://cdn.tigerb.cn/20220215203346.png" style="width:66%">
     </a>
 </p>
 
@@ -90,8 +90,8 @@ ES诞生于一个开源的JAVA库`Lucene`。通过`Lucene`官网的描述我们�
 - 第②步：查询过程，用户输入关键字(Query)，搜索引擎分析Query并返回查询结果。
 
 <p align="center">
-    <a href="http://cdn.tigerb.cn/20220306221130.png" data-lightbox="roadtrip">
-        <img src="http://cdn.tigerb.cn/20220306221130.png" style="width:39%">
+    <a href="https://cdn.tigerb.cn/20220306221130.png" data-lightbox="roadtrip">
+        <img src="https://cdn.tigerb.cn/20220306221130.png" style="width:39%">
     </a>
 </p>
 
@@ -100,8 +100,8 @@ ES诞生于一个开源的JAVA库`Lucene`。通过`Lucene`官网的描述我们�
 ### 索引过程
 
 <p align="center">
-    <a href="http://cdn.tigerb.cn/20220129183509.png" data-lightbox="roadtrip">
-        <img src="http://cdn.tigerb.cn/20220129183509.png" style="width:50%">
+    <a href="https://cdn.tigerb.cn/20220129183509.png" data-lightbox="roadtrip">
+        <img src="https://cdn.tigerb.cn/20220129183509.png" style="width:50%">
     </a>
 </p>
 
@@ -110,8 +110,8 @@ ES诞生于一个开源的JAVA库`Lucene`。通过`Lucene`官网的描述我们�
 举个栗子，比如《电商设计手册 | SkrShop》网页内容需要被搜索到，那这页网页的全部内容就称之为一个`文档Doc`。
 
 <p align="center">
-    <a href="http://cdn.tigerb.cn/20220222131248.png" data-lightbox="roadtrip">
-        <img src="http://cdn.tigerb.cn/20220222131248.png" style="width:80%">
+    <a href="https://cdn.tigerb.cn/20220222131248.png" data-lightbox="roadtrip">
+        <img src="https://cdn.tigerb.cn/20220222131248.png" style="width:80%">
     </a>
 </p>
 
@@ -225,8 +225,8 @@ SkrShop|1
 - 分词过滤器
 
 <p align="center">
-    <a href="http://cdn.tigerb.cn/20220129183541.png" data-lightbox="roadtrip">
-        <img src="http://cdn.tigerb.cn/20220129183541.png" style="width:60%">
+    <a href="https://cdn.tigerb.cn/20220129183541.png" data-lightbox="roadtrip">
+        <img src="https://cdn.tigerb.cn/20220129183541.png" style="width:60%">
     </a>
 </p>
 
@@ -237,8 +237,8 @@ SkrShop|1
 格式化为标准文本(text -> standard text)，例如去掉文本中的html标签。
 
 <p align="center">
-    <a href="http://cdn.tigerb.cn/20220129183701.png" data-lightbox="roadtrip">
-        <img src="http://cdn.tigerb.cn/20220129183701.png" style="width:60%">
+    <a href="https://cdn.tigerb.cn/20220129183701.png" data-lightbox="roadtrip">
+        <img src="https://cdn.tigerb.cn/20220129183701.png" style="width:60%">
     </a>
 </p>
 
@@ -254,8 +254,8 @@ SkrShop|1
 **自定义词库**：
 
 <p align="center">
-    <a href="http://cdn.tigerb.cn/20220129183714.png" data-lightbox="roadtrip">
-        <img src="http://cdn.tigerb.cn/20220129183714.png" style="width:60%">
+    <a href="https://cdn.tigerb.cn/20220129183714.png" data-lightbox="roadtrip">
+        <img src="https://cdn.tigerb.cn/20220129183714.png" style="width:60%">
     </a>
 </p>
 
@@ -272,8 +272,8 @@ SkrShop|1
 - 等等...
 
 <p align="center">
-    <a href="http://cdn.tigerb.cn/20220215205418.png" data-lightbox="roadtrip">
-        <img src="http://cdn.tigerb.cn/20220215205418.png" style="width:60%">
+    <a href="https://cdn.tigerb.cn/20220215205418.png" data-lightbox="roadtrip">
+        <img src="https://cdn.tigerb.cn/20220215205418.png" style="width:60%">
     </a>
 </p>
 
@@ -291,8 +291,8 @@ SkrShop|1
 ### 查询过程
 
 <p align="center">
-    <a href="http://cdn.tigerb.cn/20220215205523.png" data-lightbox="roadtrip">
-        <img src="http://cdn.tigerb.cn/20220215205523.png" style="width:30%">
+    <a href="https://cdn.tigerb.cn/20220215205523.png" data-lightbox="roadtrip">
+        <img src="https://cdn.tigerb.cn/20220215205523.png" style="width:30%">
     </a>
 </p>
 
@@ -311,8 +311,8 @@ SkrShop|1
 - 相同分词过滤器
 
 <p align="center">
-    <a href="http://cdn.tigerb.cn/20220220211920.png" data-lightbox="roadtrip">
-        <img src="http://cdn.tigerb.cn/20220220211920.png" style="width:60%">
+    <a href="https://cdn.tigerb.cn/20220220211920.png" data-lightbox="roadtrip">
+        <img src="https://cdn.tigerb.cn/20220220211920.png" style="width:60%">
     </a>
 </p>
 
@@ -358,8 +358,8 @@ SkrShop|1
 比如命中了停用词`是`：
   
 <p align="center">
-    <a href="http://cdn.tigerb.cn/20220302203921.png" data-lightbox="roadtrip">
-        <img src="http://cdn.tigerb.cn/20220302203921.png" style="width:39%">
+    <a href="https://cdn.tigerb.cn/20220302203921.png" data-lightbox="roadtrip">
+        <img src="https://cdn.tigerb.cn/20220302203921.png" style="width:39%">
     </a>
 </p>
 
@@ -511,16 +511,16 @@ SkrShop|1
 1. 索引过程：文档(Doc) -> 分析 -> 倒排索引。
 
 <p align="center">
-    <a href="http://cdn.tigerb.cn/20220306223101.png" data-lightbox="roadtrip">
-        <img src="http://cdn.tigerb.cn/20220306223101.png" style="width:50%">
+    <a href="https://cdn.tigerb.cn/20220306223101.png" data-lightbox="roadtrip">
+        <img src="https://cdn.tigerb.cn/20220306223101.png" style="width:50%">
     </a>
 </p>
 
 2. 查询过程：关键字(Query) -> 分析 -> 召回 -> 排序。
 
 <p align="center">
-    <a href="http://cdn.tigerb.cn/20220306223043.png" data-lightbox="roadtrip">
-        <img src="http://cdn.tigerb.cn/20220306223043.png" style="width:30%">
+    <a href="https://cdn.tigerb.cn/20220306223043.png" data-lightbox="roadtrip">
+        <img src="https://cdn.tigerb.cn/20220306223043.png" style="width:30%">
     </a>
 </p>
 
@@ -534,23 +534,23 @@ SkrShop|1
         * 文档doc：需要被搜索的具体文档
 
 <p align="center">
-    <a href="http://cdn.tigerb.cn/20220129190541.png" data-lightbox="roadtrip">
-        <img src="http://cdn.tigerb.cn/20220129190541.png" style="width:60%">
+    <a href="https://cdn.tigerb.cn/20220129190541.png" data-lightbox="roadtrip">
+        <img src="https://cdn.tigerb.cn/20220129190541.png" style="width:60%">
     </a>
 </p>
 
 进一步完善搜索过程：加入更详细的索引(名词)结构
 
 <p align="center">
-    <a href="http://cdn.tigerb.cn/20220306224045.png" data-lightbox="roadtrip">
-        <img src="http://cdn.tigerb.cn/20220306224045.png" style="width:80%">
+    <a href="https://cdn.tigerb.cn/20220306224045.png" data-lightbox="roadtrip">
+        <img src="https://cdn.tigerb.cn/20220306224045.png" style="width:80%">
     </a>
 </p>
 
 ### 搜索引擎ES的逻辑结构
 
 <p align="center">
-    <a href="http://cdn.tigerb.cn/20220129191435.png" data-lightbox="roadtrip">
-        <img src="http://cdn.tigerb.cn/20220129191435.png" style="width:90%">
+    <a href="https://cdn.tigerb.cn/20220129191435.png" data-lightbox="roadtrip">
+        <img src="https://cdn.tigerb.cn/20220129191435.png" style="width:90%">
     </a>
 </p>

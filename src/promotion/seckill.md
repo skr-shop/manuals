@@ -16,14 +16,14 @@
 我们先来看如下京东、有品、拼多多的秒杀页面截图。
 
 <p align="center">
-    <a href="http://cdn.tigerb.cn/20200712224532.jpeg">
-        <img src="http://cdn.tigerb.cn/20200712224532.jpeg" width="30%">
+    <a href="https://cdn.tigerb.cn/20200712224532.jpeg">
+        <img src="https://cdn.tigerb.cn/20200712224532.jpeg" width="30%">
     </a>
-    <a href="http://cdn.tigerb.cn/20200712224556.jpeg">
-        <img src="http://cdn.tigerb.cn/20200712224556.jpeg" width="30%">
+    <a href="https://cdn.tigerb.cn/20200712224556.jpeg">
+        <img src="https://cdn.tigerb.cn/20200712224556.jpeg" width="30%">
     </a>
-    <a href="http://cdn.tigerb.cn/20200712224606.jpeg">
-        <img src="http://cdn.tigerb.cn/20200712224606.jpeg" width="30%">
+    <a href="https://cdn.tigerb.cn/20200712224606.jpeg">
+        <img src="https://cdn.tigerb.cn/20200712224606.jpeg" width="30%">
     </a>
 </p>
 
@@ -77,24 +77,24 @@
 ### 首先，一元秒杀之类：白菜价+极少+(爆品或者非爆品)+限时
 
 <p align="center">
-    <a href="http://cdn.tigerb.cn/20200718215320.png">
-        <img src="http://cdn.tigerb.cn/20200718215320.png" width="80%">
+    <a href="https://cdn.tigerb.cn/20200718215320.png">
+        <img src="https://cdn.tigerb.cn/20200718215320.png" width="80%">
     </a>
 </p>
 
 ### 其次，限时购(又称常规秒杀)：非白菜价+(极少或非极少)+(爆品或者非爆品)+限时
 
 <p align="center">
-    <a href="http://cdn.tigerb.cn/20200718215411.png">
-        <img src="http://cdn.tigerb.cn/20200718215411.png" width="80%">
+    <a href="https://cdn.tigerb.cn/20200718215411.png">
+        <img src="https://cdn.tigerb.cn/20200718215411.png" width="80%">
     </a>
 </p>
 
 ### 接着，爆品抢购：非白菜价+(极少或非极少)+爆品+限时
 
 <p align="center">
-    <a href="http://cdn.tigerb.cn/20200718215425.png">
-        <img src="http://cdn.tigerb.cn/20200718215425.png" width="80%">
+    <a href="https://cdn.tigerb.cn/20200718215425.png">
+        <img src="https://cdn.tigerb.cn/20200718215425.png" width="80%">
     </a>
 </p>
 
@@ -110,8 +110,8 @@
 
 **图一**
 <p align="center">
-    <a href="http://cdn.tigerb.cn/20200501175532.png">
-        <img src="http://cdn.tigerb.cn/20200501175532.png" width="100%">
+    <a href="https://cdn.tigerb.cn/20200501175532.png">
+        <img src="https://cdn.tigerb.cn/20200501175532.png" width="100%">
     </a>
 </p>
 
@@ -136,8 +136,8 @@
 
 **图二**
 <p align="center">
-    <a href="http://cdn.tigerb.cn/20200501183037.png">
-        <img src="http://cdn.tigerb.cn/20200501183037.png">
+    <a href="https://cdn.tigerb.cn/20200501183037.png">
+        <img src="https://cdn.tigerb.cn/20200501183037.png">
     </a>
 </p>
 
@@ -164,8 +164,8 @@
 
 **图三**
 <p align="center">
-    <a href="http://cdn.tigerb.cn/20200501200309.png">
-        <img src="http://cdn.tigerb.cn/20200501200309.png">
+    <a href="https://cdn.tigerb.cn/20200501200309.png">
+        <img src="https://cdn.tigerb.cn/20200501200309.png">
     </a>
 </p>
 
@@ -190,8 +190,8 @@
 
 **图四**
 <p align="center">
-    <a href="http://cdn.tigerb.cn/20200501200846.png">
-        <img src="http://cdn.tigerb.cn/20200501200846.png">
+    <a href="https://cdn.tigerb.cn/20200501200846.png">
+        <img src="https://cdn.tigerb.cn/20200501200846.png">
     </a>
 </p>
 
@@ -216,8 +216,8 @@
 
 **图五**
 <p align="center">
-    <a href="http://cdn.tigerb.cn/20200502195413.png">
-        <img src="http://cdn.tigerb.cn/20200502195413.png">
+    <a href="https://cdn.tigerb.cn/20200502195413.png">
+        <img src="https://cdn.tigerb.cn/20200502195413.png">
     </a>
 </p>
 
@@ -257,15 +257,15 @@
 
 **以前是这样**
 <p align="center">
-    <a href="http://cdn.tigerb.cn/20200502195950.png">
-        <img src="http://cdn.tigerb.cn/20200502195950.png" width="66%">
+    <a href="https://cdn.tigerb.cn/20200502195950.png">
+        <img src="https://cdn.tigerb.cn/20200502195950.png" width="66%">
     </a>
 </p>
 
 **变成了这样**
 <p align="center">
-    <a href="http://cdn.tigerb.cn/20200502200723.png">
-        <img src="http://cdn.tigerb.cn/20200502200723.png" width="100%">
+    <a href="https://cdn.tigerb.cn/20200502200723.png">
+        <img src="https://cdn.tigerb.cn/20200502200723.png" width="100%">
     </a>
 </p>
 
@@ -276,8 +276,8 @@
 完整流程主要涉及三个接口：
 
 <p align="center">
-    <a href="http://cdn.tigerb.cn/20200718215732.png">
-        <img src="http://cdn.tigerb.cn/20200718215732.png" width="80%">
+    <a href="https://cdn.tigerb.cn/20200718215732.png">
+        <img src="https://cdn.tigerb.cn/20200718215732.png" width="80%">
     </a>
 </p>
 
@@ -290,8 +290,8 @@
 ## 完整流程方案②
 
 <p align="center">
-    <a href="http://cdn.tigerb.cn/20200718215817.png">
-        <img src="http://cdn.tigerb.cn/20200718215817.png" width="80%">
+    <a href="https://cdn.tigerb.cn/20200718215817.png">
+        <img src="https://cdn.tigerb.cn/20200718215817.png" width="80%">
     </a>
 </p>
 
@@ -307,8 +307,8 @@
 图示：
 
 <p align="center">
-    <a href="http://cdn.tigerb.cn/20200802220914.png">
-        <img src="http://cdn.tigerb.cn/20200802220914.png" width="50%">
+    <a href="https://cdn.tigerb.cn/20200802220914.png">
+        <img src="https://cdn.tigerb.cn/20200802220914.png" width="50%">
     </a>
 </p>
 

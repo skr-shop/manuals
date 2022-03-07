@@ -21,9 +21,9 @@
 
 做系统概念很重要 尤其是电商系统
 
-![](http://cdn.tigerb.cn/20200712224532.jpeg)
-![](http://cdn.tigerb.cn/20200712224556.jpeg)
-![](http://cdn.tigerb.cn/20200712224606.jpeg)
+![](https://cdn.tigerb.cn/20200712224532.jpeg)
+![](https://cdn.tigerb.cn/20200712224556.jpeg)
+![](https://cdn.tigerb.cn/20200712224606.jpeg)
 
 ```
 页面上的电商概念：1. 活动场次 活动的概念、场次的概念 场次是活动的子
@@ -278,21 +278,21 @@ func (srv *Server) Serve(l net.Listener) error {
 
 
 一个简单的秒杀系统
-![](http://cdn.tigerb.cn/20200501175532.png)
+![](https://cdn.tigerb.cn/20200501175532.png)
 
 一个够用的秒杀系统
-![](http://cdn.tigerb.cn/20200501183037.png)
+![](https://cdn.tigerb.cn/20200501183037.png)
 
 性能再好点的秒杀系统
-![](http://cdn.tigerb.cn/20200501200309.png)
+![](https://cdn.tigerb.cn/20200501200309.png)
 
 支持动态伸缩容的秒杀系统
-![](http://cdn.tigerb.cn/20200501200846.png)
+![](https://cdn.tigerb.cn/20200501200846.png)
 
 公平的秒杀系统
-![](http://cdn.tigerb.cn/20200502195413.png)
+![](https://cdn.tigerb.cn/20200502195413.png)
 
-![](http://cdn.tigerb.cn/20200502200723.png)
+![](https://cdn.tigerb.cn/20200502200723.png)
 
 ```
 +------------+

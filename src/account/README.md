@@ -14,8 +14,8 @@
 当你第一次接触和用户相关的互联网产品时，或者曾今在我眼里。**用户体系**无非就是“登录”和“注册”，“修改用户信息”这些，等。简单来做的话，无非我们需要一张表去记录用户的身份信息：注册时(insert操作)，往表里插入一个数据；登录时(select&update操作)，通过用户标识(手机号、邮箱等)判断用户的密码是否正确；修改用户信息(select&update操作)，就是直接update这个uid的用户信息(头像、昵称等)。
 
 <p align="center">
-    <a href="http://cdn.tigerb.cn/skr-account-smaple-structure.png" data-lightbox="roadtrip">
-        <img src="http://cdn.tigerb.cn/skr-account-smaple-structure.png">
+    <a href="https://cdn.tigerb.cn/skr-account-smaple-structure.png" data-lightbox="roadtrip">
+        <img src="https://cdn.tigerb.cn/skr-account-smaple-structure.png">
     </a>
 </p>
 
@@ -26,8 +26,8 @@
 首先我们对原有的用户表进行再一次的抽象(抽离用户注册、登录依赖的字段、第三方登录) -> **账户表**，为什么这么做？随着业务的发展，以前只维护一个产品，也许某一天又开发新的产品，这样我们就可以统一的维护我们公司所有产品的注册登录逻辑，不同的产品只维护该产品和用户相关的信息即可(具体依赖产品形态)。如下图所示：
 
 <p align="center">
-    <a href="http://cdn.tigerb.cn/skr-user-system-2.png" data-lightbox="roadtrip">
-        <img src="http://cdn.tigerb.cn/skr-user-system-2.png">
+    <a href="https://cdn.tigerb.cn/skr-user-system-2.png" data-lightbox="roadtrip">
+        <img src="https://cdn.tigerb.cn/skr-user-system-2.png">
     </a>
 </p>
 
@@ -58,8 +58,8 @@
 - 第三部分：员工(**应用层**，员工权限体系)
 
 <p align="center">
-    <a href="http://cdn.tigerb.cn/skr-account-structure.jpg" data-lightbox="roadtrip">
-        <img src="http://cdn.tigerb.cn/skr-account-structure.jpg">
+    <a href="https://cdn.tigerb.cn/skr-account-structure.jpg" data-lightbox="roadtrip">
+        <img src="https://cdn.tigerb.cn/skr-account-structure.jpg">
     </a>
 </p>
 
@@ -98,8 +98,8 @@
 最最后就是上面的9张表了，具体的表结构和sql如下：
 
 <p align="center">
-    <a href="http://cdn.tigerb.cn/skr-account-model.png" data-lightbox="roadtrip">
-        <img src="http://cdn.tigerb.cn/skr-account-model-2.png">
+    <a href="https://cdn.tigerb.cn/skr-account-model.png" data-lightbox="roadtrip">
+        <img src="https://cdn.tigerb.cn/skr-account-model-2.png">
     </a>
 </p>
 
@@ -286,14 +286,14 @@ CREATE TABLE `auth_role_staff` (
 具体交互流程如下：
 
 <p align="center">
-    <a href="http://cdn.tigerb.cn/skr-account-register-bmpr.png" data-lightbox="roadtrip">
-        <img src="http://cdn.tigerb.cn/skr-account-register-bmpr.png" width="39%">
+    <a href="https://cdn.tigerb.cn/skr-account-register-bmpr.png" data-lightbox="roadtrip">
+        <img src="https://cdn.tigerb.cn/skr-account-register-bmpr.png" width="39%">
     </a>
-    <a href="http://cdn.tigerb.cn/skr-account-register.jpg" data-lightbox="roadtrip">
-        <img src="http://cdn.tigerb.cn/skr-account-register.jpg" width="90%">
+    <a href="https://cdn.tigerb.cn/skr-account-register.jpg" data-lightbox="roadtrip">
+        <img src="https://cdn.tigerb.cn/skr-account-register.jpg" width="90%">
     </a>
-    <a href="http://cdn.tigerb.cn/skr-account-register-result-2.png" data-lightbox="roadtrip">
-        <img src="http://cdn.tigerb.cn/skr-account-register-result-2.png" width="90%">
+    <a href="https://cdn.tigerb.cn/skr-account-register-result-2.png" data-lightbox="roadtrip">
+        <img src="https://cdn.tigerb.cn/skr-account-register-result-2.png" width="90%">
     </a>
 </p>
 
@@ -302,14 +302,14 @@ CREATE TABLE `auth_role_staff` (
 ### 登录
 
 <p align="center">
-    <a href="http://cdn.tigerb.cn/skr-account-login-page.png" data-lightbox="roadtrip">
-        <img src="http://cdn.tigerb.cn/skr-account-login-page.png" width="30%">
+    <a href="https://cdn.tigerb.cn/skr-account-login-page.png" data-lightbox="roadtrip">
+        <img src="https://cdn.tigerb.cn/skr-account-login-page.png" width="30%">
     </a>
-    <a href="http://cdn.tigerb.cn/skr-account-login-logic.jpg" data-lightbox="roadtrip">
-        <img src="http://cdn.tigerb.cn/skr-account-login-logic.jpg" width="90%">
+    <a href="https://cdn.tigerb.cn/skr-account-login-logic.jpg" data-lightbox="roadtrip">
+        <img src="https://cdn.tigerb.cn/skr-account-login-logic.jpg" width="90%">
     </a>
-    <a href="http://cdn.tigerb.cn/skr-account-home-page.png" data-lightbox="roadtrip">
-        <img src="http://cdn.tigerb.cn/skr-account-home-page.png" width="30%">
+    <a href="https://cdn.tigerb.cn/skr-account-home-page.png" data-lightbox="roadtrip">
+        <img src="https://cdn.tigerb.cn/skr-account-home-page.png" width="30%">
     </a>
 </p>
 
@@ -318,8 +318,8 @@ CREATE TABLE `auth_role_staff` (
 快捷登录的流程基本和上面一致只是验证密码换成了验证验证码。
 
 <p align="center">
-    <a href="http://cdn.tigerb.cn/skr-account-simple-login-page.png" data-lightbox="roadtrip">
-        <img src="http://cdn.tigerb.cn/skr-account-simple-login-page.png" width="39%">
+    <a href="https://cdn.tigerb.cn/skr-account-simple-login-page.png" data-lightbox="roadtrip">
+        <img src="https://cdn.tigerb.cn/skr-account-simple-login-page.png" width="39%">
     </a>
 </p>
 
@@ -340,8 +340,8 @@ CREATE TABLE `auth_role_staff` (
 
 
 <p align="center">
-    <a href="http://cdn.tigerb.cn/skr-account-platform-login.jpg" data-lightbox="roadtrip">
-        <img src="http://cdn.tigerb.cn/skr-account-platform-login.jpg" width="100%">
+    <a href="https://cdn.tigerb.cn/skr-account-platform-login.jpg" data-lightbox="roadtrip">
+        <img src="https://cdn.tigerb.cn/skr-account-platform-login.jpg" width="100%">
     </a>
 </p>
 
@@ -349,8 +349,8 @@ CREATE TABLE `auth_role_staff` (
 交互界面图如下：
 
 <p align="center">
-    <a href="http://cdn.tigerb.cn/skr-account-platform-login-page.png" data-lightbox="roadtrip">
-        <img src="http://cdn.tigerb.cn/skr-account-platform-login-page.png" width="39%">
+    <a href="https://cdn.tigerb.cn/skr-account-platform-login-page.png" data-lightbox="roadtrip">
+        <img src="https://cdn.tigerb.cn/skr-account-platform-login-page.png" width="39%">
     </a>
 </p>
 
@@ -378,8 +378,8 @@ CREATE TABLE `auth_role_staff` (
 具体交互如下：
 
 <p align="center">
-    <a href="http://cdn.tigerb.cn/skr-earth-2.jpg" data-lightbox="roadtrip">
-        <img src="http://cdn.tigerb.cn/skr-earth-2.jpg" width="100%">
+    <a href="https://cdn.tigerb.cn/skr-earth-2.jpg" data-lightbox="roadtrip">
+        <img src="https://cdn.tigerb.cn/skr-earth-2.jpg" width="100%">
     </a>
 </p>
 

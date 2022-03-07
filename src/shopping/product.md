@@ -48,8 +48,8 @@
 通过上面的需求分析，再加上之前的《电商设计手册之用户体系》中的用户体系和《支付开发，不得不了解的国内、国际第三方支付流程》中的支付服务，我们规划出以下的架构图。
 
 <p align="center">
-    <a href="http://cdn.tigerb.cn/skr-product-service.jpg" data-lightbox="roadtrip">
-        <img src="http://cdn.tigerb.cn/skr-product-service.jpg">
+    <a href="https://cdn.tigerb.cn/skr-product-service.jpg" data-lightbox="roadtrip">
+        <img src="https://cdn.tigerb.cn/skr-product-service.jpg">
     </a>
 </p>
 
