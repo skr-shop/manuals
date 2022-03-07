@@ -28,6 +28,9 @@
 - [物流系统](/src/express/)
 - [售后服务](/src/aftersale/)
 - [基础服务](/src/base/)
+    + 搜索服务
+        * [电商搜索业务介绍](/src/base/search/business)
+        * [由浅到深，入门搜索原理](/src/base/search/tech)
     + 接口静态化服务
     + 上传服务
     + 消息服务

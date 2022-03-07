@@ -22,11 +22,15 @@
     + [支付系统设计](/src/trade/?id=支付系统设计)
     + 收银台
 - [订单中心](/src/order/)
+    + [订单结算页](/src/order/checkout)
 - [仓储系统](/src/warehouse/)
     + 地址服务
 - [物流系统](/src/express/)
 - [售后服务](/src/aftersale/)
 - [基础服务](/src/base/)
+    + 搜索服务
+        * [电商搜索业务介绍](/src/base/search/business)
+        * [由浅到深，入门搜索原理](/src/base/search/tech)
     + 接口静态化服务
     + 上传服务
     + 消息服务
