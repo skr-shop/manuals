@@ -1,6 +1,6 @@
 # 由浅到深，入门搜索原理
 
-次带来电商搜索业务的介绍，电商搜索系列分为两篇文章：
+本次带来电商搜索业务的介绍，电商搜索系列分为两篇文章：
 
 - 电商搜索业务介绍
 - 由浅到深，入门搜索原理
@@ -11,13 +11,15 @@
 
 搜索名词概念|描述
 ------|------
-倒排索引(Inverted Index)|？
-关键字(Query)|？
 文档(Doc)|？
 词条(Term)|？
+倒排索引(Inverted Index)|？
+关键字(Query)|？
 召回(Recall)|？
 词频(tf:Term Frequency)|？
 逆文档率(idf:Inverse Document Frequency)|？
+粗排|？
+精排|？
 
 本篇文章由简到繁入门搜索原理，并逐步揭开上面这些概念的面纱。本文结构如下：
 
@@ -45,6 +47,7 @@
         * 排序
             + 什么是词频(tf:Term Frequency)
             + 什么是逆文档率(idf:Inverse Document Frequency)
+            + 粗排/精排
     + 搜索过程总结
 - 搜索引擎ES进阶
     + 索引(名词)的基本结构
@@ -251,7 +254,7 @@ SkrShop|1
 文档(Doc)拆解为多个独立词条(doc -> terms)的过程。举个例子：
 比如`电商设计手册SkrShop`--->`电商 / 设计 / 手册 / SkrShop`
 
-**自定义词库**：
+这里还需要提到的是**自定义词库**：原始词库不具备的词汇，比如最近新产生的网络词汇。
 
 <p align="center">
     <a href="https://cdn.tigerb.cn/20220129183714.png" data-lightbox="roadtrip">
@@ -425,9 +428,15 @@ SkrShop|1
 ------|------
 召回(Recall)|搜索引擎利用倒排索引，通过词条获取相关文档的过程。
 
-上述召回过程，用户通过搜索`秒杀系统的设计`找到了文档1、2。问题来了：
+上述召回过程，用户通过搜索`秒杀系统的设计`找到了文档1、2。
 
-> 文档1、2，谁在前，谁在后的顺序怎么决定呢？
+```
+补充：以上基于倒排索引的文本召回方式。除此之外还有基于相同类目、其他相似属性的召回方式，以及基于深度学习的向量召回。
+```
+
+接着问题来了：
+
+> 召回的文档1、2，谁在前，谁在后的顺序怎么决定呢？
 
 接着下文来讲搜索引擎排序的实现。
 
@@ -437,14 +446,14 @@ SkrShop|1
 
 > 文档1、2，谁在前，谁在后的顺序怎么决定呢？
 
-答：文档的相关性决定的，搜索引擎会给文档的相关性进行打分score。决定这个分数score主要是两个指标：
+答：文档的相关性决定的，搜索引擎会给文档的相关性进行打分score。通常决定这个分数score主要是两个指标：
 
 - 文档率：tf(Term Frequency)
 - 逆文档率：idf(Inverse Document Frequency)
 
-可以简单理解为相关性score = 文档率 * 逆文档率，接着，我们分别看看相关概念的含义。
+可以简单理解为相关性score = 文档率 * 逆文档率，相关性score的值越高排序越靠前，接着，我们分别看看相关概念的含义。
 
-###### 什么是词频(tf:Term Frequency)
+##### 什么是词频(tf:Term Frequency)
 
 还是使用上面的文档：
 
@@ -454,7 +463,7 @@ SkrShop|1
 2|秒杀是电商的一种营销手段|秒杀 / 电商 / 一种 / 营销 / 手段
 3|购物车是电商购买流程最重要的一步|购物车 / 电商 / 购买 / 流程 / 重要 / 一步
 
-这里我们以Query: `电商秒杀`（词条：`电商/秒杀`）为例。
+这里我们以词条：`电商/秒杀`为例。
 
 词频的简单算法：词频 = 词条在单个文档出现的次数/文档总词条数，词频的值越大越相关，反之越不相关。
 
@@ -478,9 +487,9 @@ SkrShop|1
 ------|------
 词频(tf:Term Frequency)|词条在单个文档出现的次数/文档总词条数
 
-###### 什么是逆文档率(idf:Inverse Document Frequency)
+##### 什么是逆文档率(idf:Inverse Document Frequency)
 
-对于单个文档而言，词频越的值越相关，这个对于单个文档的维度。
+对于单个文档而言，词频越的值越相关。
 
 > 思考个问题，如果某个词条在所有文档都出现，相关性越好还是越不好？
 
@@ -504,7 +513,18 @@ SkrShop|1
 电商|log(3/3+1)
 秒杀|log(3/1+1)
 
-最终就计算出每个文档分别对应每个Query词条的相关性score：相关性score = 文档率 * 逆文档率。
+最终就计算出每个文档分别对应每个Query词条的相关性score(tf/idf)：相关性score = 文档率 * 逆文档率。
+
+##### 粗排/精排
+
+上面利用tf/idf分数(`相关性score = 文档率 * 逆文档率`)排序的结果只是对召回文档的初步排序，称之为`粗排`。
+
+得到`粗排`的结果后，通常还会把文档按照实际业务的要求进行更精确的排序，比如通过`人工干预`增加一些文档的权重，使之排序更靠前，这个过程就是`精排`。
+
+搜索名词概念|描述
+------|------
+粗排|利用tf/idf分数排序召回文档的过程
+精排|把粗排结果，按照实际业务的要求更加精确的排序等等
 
 ### 搜索过程总结
 
@@ -516,11 +536,11 @@ SkrShop|1
     </a>
 </p>
 
-2. 查询过程：关键字(Query) -> 分析 -> 召回 -> 排序。
+2. 查询过程：关键字(Query) -> 分析 -> 召回 -> 粗排 -> 精排。
 
 <p align="center">
-    <a href="https://cdn.tigerb.cn/20220306223043.png" data-lightbox="roadtrip">
-        <img src="https://cdn.tigerb.cn/20220306223043.png" style="width:30%">
+    <a href="http://cdn.tigerb.cn/20220308194729.png" data-lightbox="roadtrip">
+        <img src="http://cdn.tigerb.cn/20220308194729.png" style="width:30%">
     </a>
 </p>
 
@@ -534,16 +554,16 @@ SkrShop|1
         * 文档doc：需要被搜索的具体文档
 
 <p align="center">
-    <a href="https://cdn.tigerb.cn/20220129190541.png" data-lightbox="roadtrip">
-        <img src="https://cdn.tigerb.cn/20220129190541.png" style="width:60%">
+    <a href="http://cdn.tigerb.cn/20220308195018.png" data-lightbox="roadtrip">
+        <img src="http://cdn.tigerb.cn/20220308195018.png" style="width:60%">
     </a>
 </p>
 
 进一步完善搜索过程：加入更详细的索引(名词)结构
 
 <p align="center">
-    <a href="https://cdn.tigerb.cn/20220306224045.png" data-lightbox="roadtrip">
-        <img src="https://cdn.tigerb.cn/20220306224045.png" style="width:80%">
+    <a href="http://cdn.tigerb.cn/20220308194814.png" data-lightbox="roadtrip">
+        <img src="http://cdn.tigerb.cn/20220308194814.png" style="width:80%">
     </a>
 </p>
 
