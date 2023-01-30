@@ -539,8 +539,8 @@ SkrShop|1
 2. 查询过程：关键字(Query) -> 分析 -> 召回 -> 粗排 -> 精排。
 
 <p align="center">
-    <a href="http://cdn.tigerb.cn/20220309203114.png" data-lightbox="roadtrip">
-        <img src="http://cdn.tigerb.cn/20220309203114.png" style="width:30%">
+    <a href="http://ro98r0r1a.hb-bkt.clouddn.com/20220309203114.png" data-lightbox="roadtrip">
+        <img src="http://ro98r0r1a.hb-bkt.clouddn.com/20220309203114.png" style="width:30%">
     </a>
 </p>
 
@@ -554,16 +554,16 @@ SkrShop|1
         * 文档doc：需要被搜索的具体文档
 
 <p align="center">
-    <a href="http://cdn.tigerb.cn/20220308195018.png" data-lightbox="roadtrip">
-        <img src="http://cdn.tigerb.cn/20220308195018.png" style="width:60%">
+    <a href="http://ro98r0r1a.hb-bkt.clouddn.com/20220308195018.png" data-lightbox="roadtrip">
+        <img src="http://ro98r0r1a.hb-bkt.clouddn.com/20220308195018.png" style="width:60%">
     </a>
 </p>
 
 进一步完善搜索过程：加入更详细的索引(名词)结构
 
 <p align="center">
-    <a href="http://cdn.tigerb.cn/20220308194814.png" data-lightbox="roadtrip">
-        <img src="http://cdn.tigerb.cn/20220308194814.png" style="width:80%">
+    <a href="http://ro98r0r1a.hb-bkt.clouddn.com/20220308194814.png" data-lightbox="roadtrip">
+        <img src="http://ro98r0r1a.hb-bkt.clouddn.com/20220308194814.png" style="width:80%">
     </a>
 </p>
 
