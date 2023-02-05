@@ -14,8 +14,8 @@
 
 **图一**
 <p align="center">
-    <a href="https://ro98r0r1a.hb-bkt.clouddn.com/20200501175532.png">
-        <img src="https://ro98r0r1a.hb-bkt.clouddn.com/20200501175532.png" width="100%">
+    <a href="https://blog-1251019962.cos.ap-beijing.myqcloud.com/qiniu_img_2022/20200501175532.png">
+        <img src="https://blog-1251019962.cos.ap-beijing.myqcloud.com/qiniu_img_2022/20200501175532.png" width="100%">
     </a>
 </p>
 
@@ -40,8 +40,8 @@
 
 **图二**
 <p align="center">
-    <a href="https://ro98r0r1a.hb-bkt.clouddn.com/20200501183037.png">
-        <img src="https://ro98r0r1a.hb-bkt.clouddn.com/20200501183037.png">
+    <a href="https://blog-1251019962.cos.ap-beijing.myqcloud.com/qiniu_img_2022/20200501183037.png">
+        <img src="https://blog-1251019962.cos.ap-beijing.myqcloud.com/qiniu_img_2022/20200501183037.png">
     </a>
 </p>
 
@@ -68,8 +68,8 @@
 
 **图三**
 <p align="center">
-    <a href="https://ro98r0r1a.hb-bkt.clouddn.com/20200501200309.png">
-        <img src="https://ro98r0r1a.hb-bkt.clouddn.com/20200501200309.png">
+    <a href="https://blog-1251019962.cos.ap-beijing.myqcloud.com/qiniu_img_2022/20200501200309.png">
+        <img src="https://blog-1251019962.cos.ap-beijing.myqcloud.com/qiniu_img_2022/20200501200309.png">
     </a>
 </p>
 
@@ -94,8 +94,8 @@
 
 **图四**
 <p align="center">
-    <a href="https://ro98r0r1a.hb-bkt.clouddn.com/20200501200846.png">
-        <img src="https://ro98r0r1a.hb-bkt.clouddn.com/20200501200846.png">
+    <a href="https://blog-1251019962.cos.ap-beijing.myqcloud.com/qiniu_img_2022/20200501200846.png">
+        <img src="https://blog-1251019962.cos.ap-beijing.myqcloud.com/qiniu_img_2022/20200501200846.png">
     </a>
 </p>
 
@@ -120,8 +120,8 @@
 
 **图五**
 <p align="center">
-    <a href="https://ro98r0r1a.hb-bkt.clouddn.com/20200502195413.png">
-        <img src="https://ro98r0r1a.hb-bkt.clouddn.com/20200502195413.png">
+    <a href="https://blog-1251019962.cos.ap-beijing.myqcloud.com/qiniu_img_2022/20200502195413.png">
+        <img src="https://blog-1251019962.cos.ap-beijing.myqcloud.com/qiniu_img_2022/20200502195413.png">
     </a>
 </p>
 
@@ -161,15 +161,15 @@
 
 **以前是这样**
 <p align="center">
-    <a href="https://ro98r0r1a.hb-bkt.clouddn.com/20200502195950.png">
-        <img src="https://ro98r0r1a.hb-bkt.clouddn.com/20200502195950.png" width="66%">
+    <a href="https://blog-1251019962.cos.ap-beijing.myqcloud.com/qiniu_img_2022/20200502195950.png">
+        <img src="https://blog-1251019962.cos.ap-beijing.myqcloud.com/qiniu_img_2022/20200502195950.png" width="66%">
     </a>
 </p>
 
 **变成了这样**
 <p align="center">
-    <a href="https://ro98r0r1a.hb-bkt.clouddn.com/20200502200723.png">
-        <img src="https://ro98r0r1a.hb-bkt.clouddn.com/20200502200723.png" width="100%">
+    <a href="https://blog-1251019962.cos.ap-beijing.myqcloud.com/qiniu_img_2022/20200502200723.png">
+        <img src="https://blog-1251019962.cos.ap-beijing.myqcloud.com/qiniu_img_2022/20200502200723.png" width="100%">
     </a>
 </p>
 

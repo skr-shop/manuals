@@ -18,14 +18,14 @@
 我们先来看如下京东、有品、拼多多的秒杀页面截图。
 
 <p align="center">
-    <a href="https://ro98r0r1a.hb-bkt.clouddn.com/20200712224532.jpeg">
-        <img src="https://ro98r0r1a.hb-bkt.clouddn.com/20200712224532.jpeg" width="30%">
+    <a href="https://blog-1251019962.cos.ap-beijing.myqcloud.com/qiniu_img_2022/20200712224532.jpeg">
+        <img src="https://blog-1251019962.cos.ap-beijing.myqcloud.com/qiniu_img_2022/20200712224532.jpeg" width="30%">
     </a>
-    <a href="https://ro98r0r1a.hb-bkt.clouddn.com/20200712224556.jpeg">
-        <img src="https://ro98r0r1a.hb-bkt.clouddn.com/20200712224556.jpeg" width="30%">
+    <a href="https://blog-1251019962.cos.ap-beijing.myqcloud.com/qiniu_img_2022/20200712224556.jpeg">
+        <img src="https://blog-1251019962.cos.ap-beijing.myqcloud.com/qiniu_img_2022/20200712224556.jpeg" width="30%">
     </a>
-    <a href="https://ro98r0r1a.hb-bkt.clouddn.com/20200712224606.jpeg">
-        <img src="https://ro98r0r1a.hb-bkt.clouddn.com/20200712224606.jpeg" width="30%">
+    <a href="https://blog-1251019962.cos.ap-beijing.myqcloud.com/qiniu_img_2022/20200712224606.jpeg">
+        <img src="https://blog-1251019962.cos.ap-beijing.myqcloud.com/qiniu_img_2022/20200712224606.jpeg" width="30%">
     </a>
 </p>
 
@@ -79,24 +79,24 @@
 ### 首先，一元秒杀之类：白菜价+极少+(爆品或者非爆品)+限时
 
 <p align="center">
-    <a href="https://ro98r0r1a.hb-bkt.clouddn.com/20200718215320.png">
-        <img src="https://ro98r0r1a.hb-bkt.clouddn.com/20200718215320.png" width="80%">
+    <a href="https://blog-1251019962.cos.ap-beijing.myqcloud.com/qiniu_img_2022/20200718215320.png">
+        <img src="https://blog-1251019962.cos.ap-beijing.myqcloud.com/qiniu_img_2022/20200718215320.png" width="80%">
     </a>
 </p>
 
 ### 其次，限时购(又称常规秒杀)：非白菜价+(极少或非极少)+(爆品或者非爆品)+限时
 
 <p align="center">
-    <a href="https://ro98r0r1a.hb-bkt.clouddn.com/20200718215411.png">
-        <img src="https://ro98r0r1a.hb-bkt.clouddn.com/20200718215411.png" width="80%">
+    <a href="https://blog-1251019962.cos.ap-beijing.myqcloud.com/qiniu_img_2022/20200718215411.png">
+        <img src="https://blog-1251019962.cos.ap-beijing.myqcloud.com/qiniu_img_2022/20200718215411.png" width="80%">
     </a>
 </p>
 
 ### 接着，爆品抢购：非白菜价+(极少或非极少)+爆品+限时
 
 <p align="center">
-    <a href="https://ro98r0r1a.hb-bkt.clouddn.com/20200718215425.png">
-        <img src="https://ro98r0r1a.hb-bkt.clouddn.com/20200718215425.png" width="80%">
+    <a href="https://blog-1251019962.cos.ap-beijing.myqcloud.com/qiniu_img_2022/20200718215425.png">
+        <img src="https://blog-1251019962.cos.ap-beijing.myqcloud.com/qiniu_img_2022/20200718215425.png" width="80%">
     </a>
 </p>
 
@@ -116,8 +116,8 @@
 完整流程主要涉及三个接口：
 
 <p align="center">
-    <a href="https://ro98r0r1a.hb-bkt.clouddn.com/20200718215732.png">
-        <img src="https://ro98r0r1a.hb-bkt.clouddn.com/20200718215732.png" width="80%">
+    <a href="https://blog-1251019962.cos.ap-beijing.myqcloud.com/qiniu_img_2022/20200718215732.png">
+        <img src="https://blog-1251019962.cos.ap-beijing.myqcloud.com/qiniu_img_2022/20200718215732.png" width="80%">
     </a>
 </p>
 
@@ -130,8 +130,8 @@
 ### 补充完整流程方案②
 
 <p align="center">
-    <a href="https://ro98r0r1a.hb-bkt.clouddn.com/20200718215817.png">
-        <img src="https://ro98r0r1a.hb-bkt.clouddn.com/20200718215817.png" width="80%">
+    <a href="https://blog-1251019962.cos.ap-beijing.myqcloud.com/qiniu_img_2022/20200718215817.png">
+        <img src="https://blog-1251019962.cos.ap-beijing.myqcloud.com/qiniu_img_2022/20200718215817.png" width="80%">
     </a>
 </p>
 
@@ -147,7 +147,7 @@
 图示：
 
 <p align="center">
-    <a href="https://ro98r0r1a.hb-bkt.clouddn.com/20200802220914.png">
-        <img src="https://ro98r0r1a.hb-bkt.clouddn.com/20200802220914.png" width="50%">
+    <a href="https://blog-1251019962.cos.ap-beijing.myqcloud.com/qiniu_img_2022/20200802220914.png">
+        <img src="https://blog-1251019962.cos.ap-beijing.myqcloud.com/qiniu_img_2022/20200802220914.png" width="50%">
     </a>
 </p>

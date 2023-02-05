@@ -9,7 +9,7 @@
 <p align="center"><a href="http://skrshop.tech/">skrshop.tech</a></p>
 
 <p align="center">
-    <img style="vertical-align:middle" width="60%" src="https://ro98r0r1a.hb-bkt.clouddn.com/20191222164829.jpg?imageMogr2/thumbnail/1280x720!/format/webp/blur/1x0/quality/90|imageslim">
+    <img style="vertical-align:middle" width="60%" src="https://blog-1251019962.cos.ap-beijing.myqcloud.com/qiniu_img_2022/20191222164829.jpg?imageMogr2/thumbnail/1280x720!/format/webp/blur/1x0/quality/90|imageslim">
 <p>
 
 # 版权声明
@@ -18,7 +18,7 @@
 - 未与任何第三方以任何形式合作。
 
 <p align="center">
-    <img style="vertical-align:middle" width="25%" src="https://ro98r0r1a.hb-bkt.clouddn.com/wechat-blog-qrcode.jpg?imageMogr2/thumbnail/260x260!/format/webp/blur/1x0/quality/90|imageslim">
+    <img style="vertical-align:middle" width="25%" src="https://blog-1251019962.cos.ap-beijing.myqcloud.com/qiniu_img_2022/wechat-blog-qrcode.jpg?imageMogr2/thumbnail/260x260!/format/webp/blur/1x0/quality/90|imageslim">
     <img style="vertical-align:middle" width="45%" src="https://dayutalk.cn/img/pub-qr.jpeg">
     <i style="display:inline-block; height:100%; vertical-align:middle; width:0;"></i>
 <p>
@@ -58,8 +58,8 @@
 # 架构
 
 <p align="center">
-    <a href="https://ro98r0r1a.hb-bkt.clouddn.com/20200628125645.jpg">
-        <img src="https://ro98r0r1a.hb-bkt.clouddn.com/20200628125645.jpg" width="100%">
+    <a href="https://blog-1251019962.cos.ap-beijing.myqcloud.com/qiniu_img_2022/20200628125645.jpg">
+        <img src="https://blog-1251019962.cos.ap-beijing.myqcloud.com/qiniu_img_2022/20200628125645.jpg" width="100%">
     </a>
 </p>
 
